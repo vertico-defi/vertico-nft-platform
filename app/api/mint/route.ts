@@ -7,7 +7,6 @@ import {
   verifyCollectionV1,
 } from "@metaplex-foundation/mpl-token-metadata";
 import {
-  createGenericFile,
   createSignerFromKeypair,
   generateSigner,
   percentAmount,
@@ -58,6 +57,41 @@ type RoyalItem = {
   traits?: Trait[];
 };
 
+type ImageUriMap = {
+  network: string;
+  uploadedAt: string | null;
+  images: {
+    pages: Record<
+      string,
+      {
+        fileName: string;
+        uri: string;
+      }
+    >;
+    courtiers: Record<
+      string,
+      {
+        fileName: string;
+        uri: string;
+      }
+    >;
+    royals: Record<
+      string,
+      {
+        fileName: string;
+        uri: string;
+      }
+    >;
+  };
+};
+
+type PreparedMintData = {
+  name: string;
+  description: string;
+  imagePath: string;
+  attributes: MintAttribute[];
+};
+
 type MintHistoryEntry = {
   id: string;
   timestamp: string;
@@ -89,6 +123,12 @@ const TREASURY_WALLET =
   process.env.TREASURY_WALLET || process.env.NEXT_PUBLIC_TREASURY_WALLET;
 
 const PROJECT_ROOT = process.cwd();
+
+const IMAGE_URI_MAP_PATH = path.join(
+  PROJECT_ROOT,
+  "data",
+  "image-uris-devnet.json"
+);
 
 const CONFIG = {
   pages: {
@@ -354,6 +394,25 @@ function getContentType(imagePath: string) {
   throw new Error(`Unsupported image type: ${imagePath}`);
 }
 
+function getUploadedImageUri(collection: CollectionType, imagePath: string) {
+  if (!fs.existsSync(IMAGE_URI_MAP_PATH)) {
+    throw new Error(`Missing uploaded image URI map: ${IMAGE_URI_MAP_PATH}`);
+  }
+
+  const imageUriMap = loadJson(IMAGE_URI_MAP_PATH) as ImageUriMap;
+  const baseName = path.parse(imagePath).name;
+
+  const uri = imageUriMap.images?.[collection]?.[baseName]?.uri;
+
+  if (!uri) {
+    throw new Error(
+      `Missing uploaded Irys image URI for ${collection}/${baseName}`
+    );
+  }
+
+  return uri;
+}
+
 function buildPageAttributes(page: PageItem): MintAttribute[] {
   const allowedCategories = [
     "Tits",
@@ -433,23 +492,6 @@ function setupUmi() {
   };
 }
 
-async function uploadImage(umi: ReturnType<typeof createUmi>, imagePath: string) {
-  const imageBuffer = fs.readFileSync(imagePath);
-  const fileName = path.basename(imagePath);
-  const contentType = getContentType(imagePath);
-
-  const file = createGenericFile(new Uint8Array(imageBuffer), fileName, {
-    contentType,
-  });
-
-  const [imageUri] = await umi.uploader.upload([file]);
-
-  return {
-    imageUri,
-    contentType,
-  };
-}
-
 async function createOrLoadCollection(
   umi: ReturnType<typeof createUmi>,
   collection: CollectionType
@@ -512,7 +554,7 @@ async function createOrLoadCollection(
   return collectionMint.publicKey;
 }
 
-function prepareMintData(collection: CollectionType) {
+function prepareMintData(collection: CollectionType): PreparedMintData {
   const config = CONFIG[collection];
   const raw = loadJson(config.dataPath);
 
@@ -695,17 +737,18 @@ export async function POST(request: NextRequest) {
     const collectionMint = await createOrLoadCollection(umi, collection);
     const mintData = prepareMintData(collection);
 
-    const { imageUri, contentType } = await uploadImage(
-      umi,
-      mintData.imagePath
-    );
+    const imageUri = getUploadedImageUri(collection, mintData.imagePath);
+    const contentType = getContentType(mintData.imagePath);
+
+    const siteUrl =
+      process.env.NEXT_PUBLIC_SITE_URL || request.nextUrl.origin;
 
     const metadataUri = await umi.uploader.uploadJson({
       name: mintData.name,
       symbol: config.collectionSymbol,
       description: mintData.description,
       image: imageUri,
-      external_url: "https://your-website.com",
+      external_url: siteUrl,
       attributes: mintData.attributes,
       properties: {
         category: "image",
