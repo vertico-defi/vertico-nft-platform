@@ -24,3 +24,24 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.wallet-button-wrapper .wallet-adapter-button {
+  border-radius: 0.75rem;
+  background: transparent;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  color: rgb(252, 211, 77);
+  font-size: 0.875rem;
+  font-weight: 600;
+  height: auto;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.wallet-button-wrapper .wallet-adapter-button:hover {
+  background: rgb(251, 191, 36);
+  color: black;
+}
+
+.wallet-button-wrapper .wallet-adapter-button:not([disabled]):hover {
+  background: rgb(251, 191, 36);
+}

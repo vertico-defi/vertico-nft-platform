@@ -1,0 +1,892 @@
+{
+    "Royals": [
+      {
+        "CID": "img1",  
+        "Name": "Duchess Seraphina & Lady Celeste",
+        "Description": "Golden Bathhouse Twins",
+        "price": "8.75",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Luscious",
+            "value": 20,
+            "description": "Soft yet perky, exuding allure with every breath.",
+            "effect": "charm",
+            "modifier": "increase_stat(charm, 12%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Steam Veil Seduction",
+            "value": 25,
+            "description": "The twins move like sirens in the palace bath, their golden locks cascading through the mist, leaving those who gaze upon them utterly spellbound.",
+            "effect": "enchantment",
+            "modifier": "chance_to_daze(opponents, 15%)"
+          }
+        ]
+      },
+      {
+        "CID": "img2",  
+        "Name": "Marquess Evelyne Nocturne",
+        "Description": "Dungeon Enchantress",
+        "price": "9.20",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Voluptuous",
+            "value": 22,
+            "description": "A mesmerizing fullness that draws the eye and weakens the will.",
+            "effect": "allure",
+            "modifier": "increase_stat(allure, 14%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Chains of Temptation",
+            "value": 27,
+            "description": "Within the palace dungeon, she is both prisoner and queen. A whisper, a touch, and even the strongest hearts find themselves willingly ensnared.",
+            "effect": "submission",
+            "modifier": "chance_to_beguile(opponents, 18%)"
+          }
+        ]
+      },
+      {
+        "CID": "img3",  
+        "Name": "Mistress Selene Ravelle",
+        "Description": "Midnight Blossom",
+        "price": "9.85",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Heavenly",
+            "value": 24,
+            "description": "Soft and perfectly rounded, captivating all who dare to look.",
+            "effect": "captivation",
+            "modifier": "increase_stat(captivation, 15%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Moonlit Ecstasy",
+            "value": 29,
+            "description": "Bathed in silver moonlight, her passionate dance in the palace courtyard sends waves of desire rippling through the night air, ensnaring all who watch.",
+            "effect": "ecstasy",
+            "modifier": "chance_to_mesmerize(opponents, 20%)"
+          }
+        ]
+      },
+      {
+        "CID": "img4",  
+        "Name": "Madame Lysandra Voss",
+        "Description": "Velvet Whisper",
+        "price": "8.95",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Supple",
+            "value": 21,
+            "description": "A perfect blend of softness and shape, mesmerizing in their natural allure.",
+            "effect": "seduction",
+            "modifier": "increase_stat(seduction, 13%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Silken Tongue Devotion",
+            "value": 30,
+            "description": "Kneeling upon the lavish palace carpet, her every whisper, kiss, and caress weaves an intoxicating spell, leaving her admirers utterly devoted.",
+            "effect": "enchantment",
+            "modifier": "chance_to_weaken_resistance(opponents, 22%)"
+          }
+        ]
+      },
+      {
+        "CID": "img5",  
+        "Name": "Madame Samira El-Faye",
+        "Description": "Palace Gift",
+        "price": "9.50",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Exquisite",
+            "value": 23,
+            "description": "Full and inviting, a perfect balance of beauty and grace.",
+            "effect": "charm",
+            "modifier": "increase_stat(charm, 14%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Scent of Jasmine",
+            "value": 28,
+            "description": "Bathed in moonlight on the palace patio, the fragrance of jasmine lingers in her wake, drawing admirers closer with every breath.",
+            "effect": "enchantment",
+            "modifier": "chance_to_lull_opponents(20%)"
+          }
+        ]
+      },
+      {
+        "CID": "img6",  
+        "Name": "Mistresses Alina & Evelyne",
+        "Description": "Golden Reflections",
+        "price": "9.80",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Radiant",
+            "value": 22,
+            "description": "Perfectly sculpted and irresistibly soft, captivating at first glance.",
+            "effect": "allure",
+            "modifier": "increase_stat(allure, 15%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Mirror Mirage",
+            "value": 30,
+            "description": "Bathed in golden candlelight, the twins move in perfect harmony, blurring the line between reality and fantasy.",
+            "effect": "temptation",
+            "modifier": "chance_to_disorient_opponents(18%)"
+          }
+        ]
+      },
+      {
+        "CID": "img7",  
+        "Name": "Emira Selima Vashti",
+        "Description": "Whispered Indulgence",
+        "price": "10.25",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Sumptuous",
+            "value": 24,
+            "description": "Rich and inviting, a tantalizing vision of indulgence.",
+            "effect": "desire",
+            "modifier": "increase_stat(desire, 16%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Shadowed Tryst",
+            "value": 31,
+            "description": "Hidden in a quiet corner of the palace, her touch ignites passions unknown, leaving strangers with unforgettable desires.",
+            "effect": "intrigue",
+            "modifier": "chance_to_leave_opponents_spellbound(22%)"
+          }
+        ]
+      },
+      {
+        "CID": "img8",  
+        "Name": "Sultana Vivienne Lys",
+        "Description": "Shattered Elegance",
+        "price": "10.75",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Opulent",
+            "value": 25,
+            "description": "Voluptuous and tantalizing, a vision of uninhibited beauty.",
+            "effect": "allure",
+            "modifier": "increase_stat(allure, 17%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Fractured Delight",
+            "value": 32,
+            "description": "Laid bare upon the cool palace tiles, her torn lingerie a remnant of ecstasy, she embodies pleasure in its rawest form.",
+            "effect": "passion",
+            "modifier": "chance_to_overwhelm_opponents(24%)"
+          }
+        ]
+      },
+      {
+        "CID": "img9",  
+        "Name": "Empress Valeria Montes",
+        "Description": "Jungle Temptress",
+        "price": "11.20",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Sumptuous",
+            "value": 26,
+            "description": "Rich and inviting, sculpted by the gods of desire.",
+            "effect": "allure",
+            "modifier": "increase_stat(allure, 18%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Temple of Temptation",
+            "value": 34,
+            "description": "Kneeling upon the sacred steps, her golden skin glowing in the jungle mist, she lures the unwary into a realm of endless pleasure.",
+            "effect": "hypnosis",
+            "modifier": "chance_to_enthrall_opponents(25%)"
+          }
+        ]
+      },
+      {
+        "CID": "img10",  
+        "Name": "Mistress Liliane Vaughn",
+        "Description": "Forbidden Delight",
+        "price": "10.75",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Plush",
+            "value": 24,
+            "description": "Soft yet firm, enticing even the most disciplined of guests.",
+            "effect": "desire",
+            "modifier": "increase_stat(desire, 16%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Velvet Tongue Serenade",
+            "value": 33,
+            "description": "In the dim glow of the gallery, her lips and tongue weave a symphony of pleasure, ensuring no visitor leaves unsatisfied.",
+            "effect": "ecstasy",
+            "modifier": "chance_to_overwhelm_opponents(22%)"
+          }
+        ]
+      },
+      {
+        "CID": "img11",  
+        "Name": "Concubine Elara Fontaine",
+        "Description": "Bathtub Temptress",
+        "price": "11.50",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Perky",
+            "value": 23,
+            "description": "Soft yet firm, an irresistible invitation.",
+            "effect": "desire",
+            "modifier": "increase_stat(desire, 17%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Bathwater Bliss",
+            "value": 35,
+            "description": "Steam rises as she waits, her golden locks tied back, lips parted, ready to indulge the next guest in pure ecstasy.",
+            "effect": "surrender",
+            "modifier": "chance_to_weaken_resistance(opponents, 25%)"
+          }
+        ]
+      },
+      {
+        "CID": "img12",  
+        "Name": "Viscountess Aurelia Marant",
+        "Description": "Expectant Siren",
+        "price": "10.30",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Full",
+            "value": 27,
+            "description": "Ripe with beauty, radiating warmth and allure.",
+            "effect": "allure",
+            "modifier": "increase_stat(allure, 19%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Blessing of Temptation",
+            "value": 36,
+            "description": "Kneeling within the bath’s embrace, her lips and tongue weave spells of euphoria, leaving her partner entranced in bliss.",
+            "effect": "devotion",
+            "modifier": "chance_to_bind_opponents(26%)"
+          }
+        ]
+      },
+      {
+        "CID": "img13",  
+        "Name": "Duchess Isolde Moreau",
+        "Description": "Ruined Temptation",
+        "price": "11.50",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Perfect",
+            "value": 28,
+            "description": "A flawless balance of softness and firmness, designed for indulgence.",
+            "effect": "seduction",
+            "modifier": "increase_stat(seduction, 20%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Shattered Elegance",
+            "value": 37,
+            "description": "Her ripped lingerie clings to her curves as she moves with unrestrained passion on the cold stone steps, turning even the strongest into willing supplicants.",
+            "effect": "dominance",
+            "modifier": "chance_to_weaken_opponents(27%)"
+          }
+        ]
+      },
+      {
+        "CID": "img14",  
+        "Name": "Madame Clarisse Fontaine",
+        "Description": "Midnight Indulgence",
+        "price": "9.25",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Supple",
+            "value": 26,
+            "description": "Soft yet firm, inviting the touch of the most discerning admirers.",
+            "effect": "temptation",
+            "modifier": "increase_stat(temptation, 18%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Mouth of Devotion",
+            "value": 35,
+            "description": "On her hands and knees upon the cool palace kitchen floor, her golden hair spills forward as her lips part in a silent promise. Every movement—every glance—beckons, a moment of pure, unspoken desire.",
+            "effect": "submission",
+            "modifier": "chance_to_weaken_opponents(23%)"
+          }
+        ]
+      },
+      {
+        "CID": "img15",  
+        "Name": "Mistress Zara D'Avril",
+        "Description": "Forbidden Offering",
+        "price": "9.50",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Rounded",
+            "value": 27,
+            "description": "Perfectly shaped, rising with each breath like an unspoken temptation.",
+            "effect": "allure",
+            "modifier": "increase_stat(allure, 19%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Shadowbound Surrender",
+            "value": 36,
+            "description": "Kneeling in the dim glow of the palace dungeon, her tank top carelessly lifted, she watches with smoldering eyes—an invitation wrapped in mystery and desire.",
+            "effect": "submission",
+            "modifier": "chance_to_enthrall_opponents(24%)"
+          }
+        ]
+      },
+      {
+        "CID": "img16",  
+        "Name": "Madame Rowan Avarice",
+        "Description": "Insatiable Ember",
+        "price": "10.25",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Lavish",
+            "value": 28,
+            "description": "Plump and inviting, a beacon of endless temptation.",
+            "effect": "desire",
+            "modifier": "increase_stat(desire, 20%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Infernal Devotion",
+            "value": 37,
+            "description": "Bound in chains yet utterly free, she welcomes every visitor with burning passion, surrendering herself to their every demand with unquenchable hunger.",
+            "effect": "submission",
+            "modifier": "chance_toweaken_resistance(opponents, 26%)"
+          }
+        ]
+      },
+      {
+        "CID": "img17",  
+        "Name": "Madame Evelisse Duvall",
+        "Description": "Streamside Offering",
+        "price": "9.85",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Abundant",
+            "value": 29,
+            "description": "Heavy and supple, made for worship and indulgence.",
+            "effect": "temptation",
+            "modifier": "increase_stat(temptation, 21%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Eternal Invitation",
+            "value": 38,
+            "description": "Perched upon the mossy stones, belly ripe with longing, she waits in quiet devotion, surrendering herself again and again beneath the forest canopy.",
+            "effect": "submission",
+            "modifier": "chance_to_provoke_relentless_desire(opponents, 27%)"
+          }
+        ]
+      },
+      {
+        "CID": "img18",  
+        "Name": "Mistress Sabine Veyron",
+        "Description": "Woodland Wayfarer",
+        "price": "9.40",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Bare",
+            "value": 27,
+            "description": "Freely exposed, drawing in every passing gaze with reckless abandon.",
+            "effect": "temptation",
+            "modifier": "increase_stat(temptation, 19%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Path of Surrender",
+            "value": 36,
+            "description": "Reclined on the palace trail, her body is an offering to those who wander through, a fleeting indulgence before their journey continues.",
+            "effect": "submission",
+            "modifier": "chance_to_instill_unshakable_desire(opponents, 25%)"
+          }
+        ]
+      },
+      {
+        "CID": "img19",  
+        "Name": "Madame Corinne D'Este",
+        "Description": "Unending Pleasure",
+        "price": "9.85",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Exposed",
+            "value": 28,
+            "description": "Hung heavy with temptation, bare and unashamed.",
+            "effect": "desire",
+            "modifier": "increase_stat(desire, 20%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Boundless Hunger",
+            "value": 38,
+            "description": "She welcomes all without hesitation, her body open to pleasure without limit, drawing countless admirers into her embrace at once.",
+            "effect": "temptation",
+            "modifier": "chance_to_enthrall_all_opponents(28%)"
+          }
+        ]
+      },
+      {
+        "CID": "img20",  
+        "Name": "Emira Natalia Vasquez",
+        "Description": "Ruined Splendor",
+        "price": "10.25",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Full",
+            "value": 27,
+            "description": "Heavy with life and desire, an irresistible vision of abundance.",
+            "effect": "captivation",
+            "modifier": "increase_stat(captivation, 19%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Echoes of Devotion",
+            "value": 36,
+            "description": "Amidst the crumbling ruins of the palace, she kneels with reverence, her lips weaving a wordless prayer of pleasure for those who find her.",
+            "effect": "submission",
+            "modifier": "chance_to_weaken_resistance(25%)"
+          }
+        ]
+      },
+      {
+        "CID": "img21",  
+        "Name": "Concubine Elise Devereux",
+        "Description": "Hallway Temptation",
+        "price": "9.50",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Petite",
+            "value": 21,
+            "description": "Delicate and perfectly shaped, a subtle but irresistible allure.",
+            "effect": "grace",
+            "modifier": "increase_stat(grace, 15%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Gilded Submission",
+            "value": 34,
+            "description": "Kneeling beneath the towering chandeliers, she welcomes every passing admirer with soft lips and eager devotion.",
+            "effect": "submission",
+            "modifier": "chance_to_weaken_resistance(23%)"
+          }
+        ]
+      },
+      {
+        "CID": "img22",  
+        "Name": "Sovereign Astrid Valmont",
+        "Description": "Bathhouse Reverie",
+        "price": "10.25",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Lavish",
+            "value": 27,
+            "description": "Sumptuous and full, a masterpiece of temptation.",
+            "effect": "desire",
+            "modifier": "increase_stat(desire, 18%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Ritual of Bliss",
+            "value": 36,
+            "description": "Reclining in scented waters, she loses herself to pleasure, drawing in onlookers with hypnotic indulgence.",
+            "effect": "seduction",
+            "modifier": "chance_to_captivate_opponents(24%)"
+          }
+        ]
+      },
+      {
+        "CID": "img23",  
+        "Name": "Domina Evelisse Laurent",
+        "Description": "Moonlit Temptation",
+        "price": "9.85",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Sumptuous",
+            "value": 26,
+            "description": "Full and inviting, commanding unrelenting desire.",
+            "effect": "allure",
+            "modifier": "increase_stat(allure, 17%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Twilight Surrender",
+            "value": 35,
+            "description": "Bathed in silver moonlight on the palace patio, she ensures no guest leaves unfulfilled.",
+            "effect": "ecstasy",
+            "modifier": "chance_to_beguile_opponents(23%)"
+          }
+        ]
+      },
+      {
+        "CID": "img24",  
+        "Name": "Marquise Selina Vale",
+        "Description": "Obsidian Heat",
+        "price": "11.50",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Lavish",
+            "value": 27,
+            "description": "Perfectly sculpted, a masterpiece of temptation.",
+            "effect": "allure",
+            "modifier": "increase_stat(allure, 18%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Sultry Steam Ritual",
+            "value": 36,
+            "description": "In the palace's steamy bathhouse, her body writhes in pure indulgence, drawing in voyeurs like moths to a flame.",
+            "effect": "ecstasy",
+            "modifier": "chance_to_enthrall_opponents(25%)"
+          }
+        ]
+      },
+      {
+        "CID": "img25",  
+        "Name": "Châtelaine Vespera Locke",
+        "Description": "Porcelain Offering",
+        "price": "10.80",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Voluptuous",
+            "value": 26,
+            "description": "Soft and heavy, made for indulgence.",
+            "effect": "desire",
+            "modifier": "increase_stat(desire, 17%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Bathhouse Surrender",
+            "value": 34,
+            "description": "Kneeling before the grand marble tub, her body is an open invitation, her purpose clear to all who enter.",
+            "effect": "submission",
+            "modifier": "chance_to_weaken_resistance(opponents, 24%)"
+          }
+        ]
+      },
+      {
+        "CID": "img26",  
+        "Name": "Signora Isabella Corvi",
+        "Description": "Gallery's Obedience",
+        "price": "10.50",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Luscious",
+            "value": 27,
+            "description": "Heavy and irresistible, crafted for indulgence.",
+            "effect": "desire",
+            "modifier": "increase_stat(desire, 18%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Whispered Surrender",
+            "value": 35,
+            "description": "Knees pressed into the palace carpet, she bows her body in silent invitation, a plaything for the desires of those who pass through.",
+            "effect": "submission",
+            "modifier": "chance_to_weaken_resistance(opponents, 25%)"
+          }
+        ]
+      },
+      {
+        "CID": "img27",  
+        "Name": "Domina Esmeralda Navarro",
+        "Description": "Chandelier's Muse",
+        "price": "10.75",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Sumptuous",
+            "value": 28,
+            "description": "Rich and inviting, sculpted to enthrall.",
+            "effect": "allure",
+            "modifier": "increase_stat(allure, 19%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Golden Temptation",
+            "value": 36,
+            "description": "Bathed in the glow of the grand chandelier, she stands poised for admiration, for pleasure, for whatever desire the night demands.",
+            "effect": "temptation",
+            "modifier": "chance_to_entrance_opponents(26%)"
+          }
+        ]
+      },
+      {
+        "CID": "img28",  
+        "Name": "Signora Viviana Moretti",
+        "Description": "Sun-Kissed Delight",
+        "price": "9.50",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Enchanting",
+            "value": 27,
+            "description": "Soft, full, and mesmerizing in their beauty.",
+            "effect": "desire",
+            "modifier": "increase_stat(desire, 18%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Palace Wall Seduction",
+            "value": 35,
+            "description": "Leaning against the sun-warmed palace stone, her delicate fingers and golden toy dance in harmony, inviting all to watch… or join.",
+            "effect": "exhibition",
+            "modifier": "chance_to_captivate_opponents(25%)"
+          }
+        ]
+      },
+      {
+        "CID": "img29",  
+        "Name": "Madonna Isabella Ferro",
+        "Description": "Wildwood Offering",
+        "price": "9.25",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Bountiful",
+            "value": 28,
+            "description": "Full and inviting, promising indulgence beyond imagination.",
+            "effect": "temptation",
+            "modifier": "increase_stat(temptation, 19%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Forest’s Open Invitation",
+            "value": 36,
+            "description": "Reclining in nature’s embrace, her body is an unspoken promise, ready and waiting for those who crave pleasure under the open sky.",
+            "effect": "submission",
+            "modifier": "chance_to_entice_opponents(26%)"
+          }
+        ]
+      },
+      {
+        "CID": "img30",  
+        "Name": "Prima Noelle D'Arcy",
+        "Description": "Studio Temptress",
+        "price": "9.60",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Perky",
+            "value": 24,
+            "description": "Delicate yet firm, moving with effortless grace.",
+            "effect": "allure",
+            "modifier": "increase_stat(allure, 17%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Pas de Deux Surrender",
+            "value": 35,
+            "description": "Her body glistens with the sheen of movement, the final act of her performance unfolding upon the floor, where she welcomes admirers to take center stage.",
+            "effect": "submission",
+            "modifier": "chance_to_beguile_opponents(24%)"
+          }
+        ]
+      },
+      {
+        "CID": "img31",  
+        "Name": "Rosalind & Rhiannon",
+        "Description": "Scarlet Gatekeepers",
+        "price": "10.85",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Supple",
+            "value": 26,
+            "description": "Perfectly shaped, inviting all who approach.",
+            "effect": "temptation",
+            "modifier": "increase_stat(temptation, 18%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Twin Offering",
+            "value": 36,
+            "description": "Laid bare at the grand palace entrance, the fiery-haired twins await, their parted lips and supple bodies ready to welcome any visitor seeking indulgence.",
+            "effect": "submission",
+            "modifier": "chance_to_enthrall_opponents(26%)"
+          }
+        ]
+      },
+      {
+        "CID": "img32",  
+        "Name": "Margravines Elsa & Elara",
+        "Description": "Golden Gatekeepers",
+        "price": "11.25",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Plush",
+            "value": 27,
+            "description": "Soft yet firm, a perfect invitation to indulgence.",
+            "effect": "desire",
+            "modifier": "increase_stat(desire, 19%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Welcome Ritual",
+            "value": 37,
+            "description": "Reclining luxuriously upon the palace drive, the radiant twins extend a lavish invitation, ensuring every guest arrives fully satisfied before stepping inside.",
+            "effect": "temptation",
+            "modifier": "chance_to_weaken_resistance(opponents, 27%)"
+          }
+        ]
+      },
+      {
+        "CID": "img33",  
+        "Name": "Viscountess Natalia Moreau",
+        "Description": "Hearthside Temptation",
+        "price": "10.50",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Tempting",
+            "value": 26,
+            "description": "Perfectly inviting, drawing all eyes in the flickering firelight.",
+            "effect": "allure",
+            "modifier": "increase_stat(allure, 18%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Ember’s Invitation",
+            "value": 35,
+            "description": "Bathed in the warm glow of the grand fireplace, her exposed form beckons every passing man to lose himself in indulgence.",
+            "effect": "passion",
+            "modifier": "chance_to_overwhelm_opponents(24%)"
+          }
+        ]
+      },
+      {
+        "CID": "img34",  
+        "Name": "Duchess Mira Delys",
+        "Description": "Lavender Seduction",
+        "price": "10.25",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Enticing",
+            "value": 25,
+            "description": "Soft and perfectly sculpted, revealed with a teasing touch.",
+            "effect": "desire",
+            "modifier": "increase_stat(desire, 17%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Veil of Mischief",
+            "value": 34,
+            "description": "Standing poised in the dim palace hall, her open sweater teases at her curves while her fingers toy with her jeans—an unspoken promise to those who dare step closer.",
+            "effect": "temptation",
+            "modifier": "chance_to_seduce_opponents(22%)"
+          }
+        ]
+      },
+      {
+        "CID": "img35",  
+        "Name": "Concubine Ingrid Vale",
+        "Description": "Kitchen Conquest",
+        "price": "10.50",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Generous",
+            "value": 26,
+            "description": "Full and captivating, drawing the eye with every movement.",
+            "effect": "allure",
+            "modifier": "increase_stat(allure, 18%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Devoted Indulgence",
+            "value": 35,
+            "description": "Sprawled upon the cool kitchen floor, her dress slipping away, she welcomes every touch, surrendering herself fully to the pleasures of the palace.",
+            "effect": "submission",
+            "modifier": "chance_to_disarm_opponents(24%)"
+          }
+        ]
+      },
+      {
+        "CID": "img36",  
+        "Name": "Courtesan Freya Lorne",
+        "Description": "Winter’s Embrace",
+        "price": "11.00",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Enticing",
+            "value": 25,
+            "description": "Perfectly cradled beneath her soft white tee, teasing and inviting.",
+            "effect": "allure",
+            "modifier": "increase_stat(allure, 17%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Snowbound Euphoria",
+            "value": 36,
+            "description": "Straddling her latest conquest on the frozen palace steps, her breath forms delicate clouds of pleasure in the cold night air.",
+            "effect": "ecstasy",
+            "modifier": "chance_to_enrapture_opponents(25%)"
+          }
+        ]
+      },
+      {
+        "CID": "img37",
+        "Name": "Mistress Sable Noire",
+        "Description": "Celestial Temptation",
+        "price": "12.75",
+        "traits": [
+          {
+            "category": "Breasts",
+            "name": "Opulent",
+            "value": 28,
+            "description": "A flawless balance of softness and allure, barely concealed beneath crimson silk.",
+            "effect": "allure",
+            "modifier": "increase_stat(allure, 20%)"
+          },
+          {
+            "category": "Special Trait",
+            "name": "Divine Ascendancy",
+            "value": 38,
+            "description": "She lounges beneath gilded arches, bathed in soft golden light. Every word is a gentle command, impossible to ignore.",
+            "effect": "reverence",
+            "modifier": "chance_to_inspire_devotion(27%)"
+          }
+        ]
+      }                                
+    ]
+  }

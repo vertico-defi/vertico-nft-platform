@@ -1,0 +1,3141 @@
+
+{
+    "Pages": [
+        {
+            "src": "img1",
+            "alt": "Evelyn - Master of Ceremonies",
+            "tits": "Perky",
+            "price": "16",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 10,
+                    "description": "Sharp, attention-grabbing. Deals quick damage, but don't underestimate them.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(attack_speed, 10%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Seductive",
+                    "value": 15,
+                    "description": "Lures enemies in with a hypnotic gaze—perfect for lowering defenses.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 50%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Petite",
+                    "value": 5,
+                    "description": "Small and nimble, great for dodging incoming attacks.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 20%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Turquoise",
+                    "value": 10,
+                    "description": "A rare gem that sparkles with mystical energy—boosts attack damage.",
+                    "effect": "attack",
+                    "modifier": "multiply_stat(attack, 1.5x)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Dirty Blonde",
+                    "value": 8,
+                    "description": "Not quite golden but still enough to shine in the right light.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charisma, 5)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Soft Glow",
+                    "value": 7,
+                    "description": "A glow that lights up the battlefield—useful for charming opponents.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Seductive Innocence",
+                    "value": 12,
+                    "description": "A deadly combination of innocence and allure.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 15%)"
+                }
+            ]
+        },
+        {
+            "src": "img2",
+            "alt": "Eliza - Palace Steward",
+            "tits": "Ample",
+            "price": "22",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 12,
+                    "description": "Bountiful and majestic. Extra cushioning for taking heavy hits.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(health, 15%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Auburn",
+                    "value": 9,
+                    "description": "Fiery and unpredictable, just like her mane.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(attack, 10) if_in_fire_battle"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Hazel",
+                    "value": 10,
+                    "description": "A warm gaze that distracts opponents with ease.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_defense, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Sun-kissed",
+                    "value": 6,
+                    "description": "She radiates with the glow of confidence and strength.",
+                    "effect": "attack",
+                    "modifier": "multiply_stat(attack, 1.2x) if_sunny"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Curvaceous",
+                    "value": 12,
+                    "description": "Full-bodied and striking, designed to dominate the field.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(health, 15%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Relaxed",
+                    "value": 5,
+                    "description": "Calm under pressure.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_critical_hit_chance, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Serene",
+                    "value": 8,
+                    "description": "At peace even in battle—calms the mind.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(defense, 5%)"
+                }
+            ]
+        },
+        {
+            "src": "img3",
+            "alt": "Amilia - Lord Chamberlain",
+            "tits": "Perky",
+            "price": "18",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 10,
+                    "description": "Sharp, attention-grabbing. Deals quick damage, but don't underestimate them.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(attack_speed, 10%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Jet Black",
+                    "value": 10,
+                    "description": "Dark, mysterious, and impossible to see coming.",
+                    "effect": "attack",
+                    "modifier": "multiply_stat(attack, 1.3x) if_night"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Dark Brown",
+                    "value": 7,
+                    "description": "A piercing gaze that sees through all deception.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_dodge, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Slim",
+                    "value": 5,
+                    "description": "Light on her feet, making it easier to dodge attacks.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(dodge, 5%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Confident",
+                    "value": 20,
+                    "description": "Commands attention and respect. Intimidates opponents.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Golden Brown",
+                    "value": 6,
+                    "description": "Radiates with a warmth that belies her strength.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(elemental_resistance, 10)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Determined",
+                    "value": 18,
+                    "description": "Focused and fierce, she doesn’t back down easily.",
+                    "effect": "attack",
+                    "modifier": "conditional_modifier(attack, health_below_50%, 1.2x)"
+                }
+            ]
+        },
+        {
+            "src": "img4",
+            "alt": "Mabel - Master Chef",
+            "tits": "Perky",
+            "price": "22",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 10,
+                    "description": "Sharp, attention-grabbing. Deals quick damage, but don't underestimate them.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(attack_speed, 15%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Fiery Red",
+                    "value": 12,
+                    "description": "A flaming mane that matches her passion in battle. Adds 1.5x damage when in a fire-based attack.",
+                    "effect": "attack",
+                    "modifier": "multiply_stat(attack, 1.5x) if_fire_battle"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Light Green",
+                    "value": 9,
+                    "description": "Soft but sharp. Captivates and disorients opponents, lowering their defense by 10%.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(defense, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Petite",
+                    "value": 6,
+                    "description": "Small, quick, and hard to pin down. Increases dodge rate by 15%.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(dodge, 15%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Elegant",
+                    "value": 15,
+                    "description": "A graceful stance that boosts charisma and persuasion, adding 10 charm points.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Fair",
+                    "value": 7,
+                    "description": "Soft and smooth, she’s a vision of beauty and grace. Adds 5% healing ability.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(healing, 5%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Playful",
+                    "value": 14,
+                    "description": "Mischievous and full of surprises—throws enemies off guard. Opponents lose 5% accuracy.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(accuracy, 5%)"
+                }
+            ]
+        },
+        {
+            "src": "img5",
+            "alt": "Sophia - Palace Librarian",
+            "tits": "Luscious",
+            "price": "24",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Luscious",
+                    "value": 15,
+                    "description": "Full and enchanting, strong enough to defend and seduce alike. Increases defense by 15% when attacked.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(defense, 15%) if_attacked"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Confident",
+                    "value": 20,
+                    "description": "Commands attention and respect. Intimidates opponents, reducing their next attack by 20%.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(attack, 20%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Hourglass",
+                    "value": 15,
+                    "description": "A perfect balance of beauty and strength. Adds 10 points to overall defense.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(defense, 10)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Light Brown",
+                    "value": 10,
+                    "description": "Warm and inviting, but don’t let your guard down. Reduces enemy’s next move by 5%.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(next_move, 5%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Golden Auburn",
+                    "value": 8,
+                    "description": "Shines like a crown in the sun—stately and regal. Adds 5 points to charm.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 5)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Warm Glow",
+                    "value": 7,
+                    "description": "A soft glow that draws people in, making her hard to resist. Increases chance of charming an opponent by 10%.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm_chance, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Sultry",
+                    "value": 18,
+                    "description": "She knows exactly what she’s doing and isn’t afraid to show it. Lowers enemy's defense by 15%.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(defense, 15%)"
+                }
+            ]
+        },
+        {
+            "src": "img6",
+            "alt": "Olivia - Palace Treasurer",
+            "tits": "Luscious",
+            "price": "15",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Luscious",
+                    "value": 15,
+                    "description": "Full and enchanting, strong enough to defend and seduce alike. Reduces opponent’s next attack by 15%.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 15%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Chestnut Brown",
+                    "value": 9,
+                    "description": "Rich and full-bodied, adds depth to her character. Boosts resistance by 5%.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(resistance, 5%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Dark Brown",
+                    "value": 7,
+                    "description": "Mysterious and deep, a well of secrets. Reduces opponent’s dodge by 10%.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(dodge, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Slender",
+                    "value": 6,
+                    "description": "Graceful and swift, perfect for dodging attacks. Adds 5% to evasion.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 5%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Poised",
+                    "value": 12,
+                    "description": "A master of self-control. Reduces enemy's next critical hit by 15%.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(critical_hit_chance, 15%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Porcelain",
+                    "value": 8,
+                    "description": "Delicate but deceptive, conceals immense strength. Increases defense by 10%.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(defense, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Calm",
+                    "value": 10,
+                    "description": "In control at all times—strategic in nature. Lowers opponent's accuracy by 10%.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(accuracy, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img7",
+            "alt": "Grace - Queen's Chambers",
+            "tits": "Ample",
+            "price": "18",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 12,
+                    "description": "Bountiful and majestic, provides extra protection. Reduces incoming damage by 15%.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(incoming_damage, 15%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Platinum Blonde",
+                    "value": 10,
+                    "description": "Bright and bold, she stands out in any crowd. Increases charisma by 5 points.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charisma, 5)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Light Blue",
+                    "value": 10,
+                    "description": "Ice cold—freezes opponents in their tracks. Lowers enemy’s defense by 10%.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(defense, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Athletic",
+                    "value": 12,
+                    "description": "Strong and agile, built for power and speed. Boosts attack by 10%.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(attack, 10%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Elegant",
+                    "value": 15,
+                    "description": "A graceful stance that boosts charisma and persuasion. Adds 5 points to charm.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 5)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Fair",
+                    "value": 7,
+                    "description": "Pure and untouched, a symbol of beauty. Reduces incoming elemental damage by 10%.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(elemental_damage, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Contemplative",
+                    "value": 13,
+                    "description": "She’s always three steps ahead of her enemies. Increases chance of evasion by 15%.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 15%)"
+                }
+            ]
+        },
+        {
+            "src": "img8",
+            "alt": "Luna - Court Historian",
+            "tits": "Ample",
+            "price": "22",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 12,
+                    "description": "Bountiful and majestic. Adds 10% defense during historical recount battles.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(defense, 10%) if_historical_battle"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Rich Brown",
+                    "value": 9,
+                    "description": "Deep and rich, like the history she preserves. Adds 5% to overall defense.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(defense, 5%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Dark Hazel",
+                    "value": 10,
+                    "description": "Warm but sharp, sees right through you. Reduces opponent’s evasion by 10%.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(evasion, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Hourglass",
+                    "value": 15,
+                    "description": "A perfect balance of beauty and strength. Adds 10 points to overall defense.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(defense, 10)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Sassy",
+                    "value": 14,
+                    "description": "Sharp and witty, she can throw opponents off with a glance. Reduces enemy's attack by 10%.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(attack, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Creamy Caramel",
+                    "value": 8,
+                    "description": "Smooth and rich, she has layers of complexity. Adds 5% to resistance against charm attacks.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(resistance_to_charm, 5%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Serene",
+                    "value": 10,
+                    "description": "Calm and composed, hard to rattle in battle. Increases defense by 5%.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(defense, 5%)"
+                }
+            ]
+        },
+        {
+            "src": "img9",
+            "alt": "Isabelle - Royal Stables",
+            "tits": "Perky",
+            "price": "20",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 10,
+                    "description": "Sharp, attention-grabbing. Adds 10% to agility.",
+                    "effect": "agility",
+                    "modifier": "increase_stat(agility, 10%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Golden Blonde",
+                    "value": 8,
+                    "description": "Bright and radiant, a true beauty. Adds 5% resistance to elemental attacks.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(resistance_to_elemental_attacks, 5%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Light Hazel",
+                    "value": 9,
+                    "description": "Soft and warm, but not to be underestimated. Reduces opponent’s charm by 5%.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(charm, 5%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Slim",
+                    "value": 5,
+                    "description": "Light and agile, she dodges with ease. Adds 10% dodge chance.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(dodge, 10%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Innocent",
+                    "value": 6,
+                    "description": "Don’t let her fool you—innocence can be a powerful weapon. Reduces enemy's attack by 10%.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(attack, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Fair",
+                    "value": 7,
+                    "description": "Delicate but with hidden strength. Adds 5 points to healing abilities.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(healing, 5)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Curious",
+                    "value": 8,
+                    "description": "Always asking questions, always looking for answers. Adds 5 points to intelligence.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(intelligence, 5)"
+                }
+            ]
+        },
+        {
+            "src": "img10",
+            "alt": "Natalie - Captain of the Guard",
+            "tits": "Perky",
+            "price": "15",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 10,
+                    "description": "Sharp, attention-grabbing. Adds 10% defense when leading a charge.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(defense, 10%) if_leading_charge"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Jet Black",
+                    "value": 10,
+                    "description": "Dark, mysterious, and impossible to see coming. Increases attack power by 1.3x during night battles.",
+                    "effect": "attack",
+                    "modifier": "multiply_stat(attack, 1.3x) if_night_battle"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Dark Brown",
+                    "value": 7,
+                    "description": "A gaze that could cut through steel. Reduces opponent’s defense by 10%.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(defense, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Pregnant",
+                    "value": 10,
+                    "description": "Carrying new life, she's stronger than ever. Increases health by 20%.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(health, 20%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Proud",
+                    "value": 15,
+                    "description": "Stands tall, never backing down from a challenge. Boosts attack by 10%.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(attack, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Porcelain",
+                    "value": 8,
+                    "description": "Delicate but fierce—don’t underestimate her. Reduces incoming elemental damage by 15%.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(elemental_damage, 15%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Gentle",
+                    "value": 10,
+                    "description": "Kind and caring, but with the heart of a warrior. Reduces opponent's attack by 5%.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(attack, 5%)"
+                }
+            ]
+        },
+        {
+            "src": "img11",
+            "alt": "Lucille - Court Musician",
+            "tits": "Perky",
+            "price": "20",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 10,
+                    "description": "Sharp, attention-grabbing. Adds 5% to all charisma-based attacks.",
+                    "effect": "charisma",
+                    "modifier": "increase_stat(charisma_attack, 5%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Ash Blonde",
+                    "value": 8,
+                    "description": "Soft and subtle, but with a hidden edge. Reduces enemy's attack by 5%.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(attack, 5%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Light Blue",
+                    "value": 9,
+                    "description": "Clear and cold, a gaze that cuts through silence. Reduces opponent's defense by 5%.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(defense, 5%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Slim",
+                    "value": 5,
+                    "description": "Light and agile, perfect for avoiding confrontation. Adds 10% to evasion.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 10%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Poised",
+                    "value": 12,
+                    "description": "Graceful and controlled—she’s never out of tune. Reduces enemy's accuracy by 10%.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(accuracy, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Fair",
+                    "value": 7,
+                    "description": "A true beauty, untarnished by time. Increases defense by 5%.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(defense, 5%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Calm",
+                    "value": 10,
+                    "description": "Always in control, even when the battle rages. Reduces opponent's next attack by 5%.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(attack, 5%)"
+                }
+            ]
+        },
+        {
+            "src": "img12",
+            "alt": "Genevieve - Ambassador Liaison",
+            "tits": "Ample",
+            "price": "22",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 12,
+                    "description": "Bountiful and majestic. Adds 10% to diplomacy-related defenses.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(diplomacy_defense, 10%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Sandy Blonde",
+                    "value": 9,
+                    "description": "Soft, like the beach breeze, but with a sharp undertone. Reduces enemy’s accuracy by 10%.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(accuracy, 10%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Light Green",
+                    "value": 10,
+                    "description": "Enchants and disarms with a single glance. Reduces opponent’s next move by 10%.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(next_move, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Curvaceous",
+                    "value": 12,
+                    "description": "Full-bodied and strong, a force to be reckoned with. Adds 10% to defense.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(defense, 10%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Seductive",
+                    "value": 18,
+                    "description": "Turns heads and hearts—perfect for distracting foes. Lowers opponent's attack by 15%.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(attack, 15%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Fair",
+                    "value": 7,
+                    "description": "Pure as snow, but don’t let that fool you. Adds 10 points to resistance.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(resistance, 10)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Naughty",
+                    "value": 15,
+                    "description": "A glint of mischief—expect the unexpected. Increases chance of critical hit by 10%.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(critical_hit_chance, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img13",
+            "alt": "Eleanor - Lady of the Garden",
+            "tits": "Luscious",
+            "price": "15",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Luscious",
+                    "value": 14,
+                    "description": "Full and captivating, provides strong defense and allure.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(defense, 15%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Graceful",
+                    "value": 16,
+                    "description": "A refined and elegant stance, perfect for charm and persuasion.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Slim",
+                    "value": 12,
+                    "description": "Light and swift, ideal for dodging attacks.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 12%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Platinum Blonde",
+                    "value": 10,
+                    "description": "Radiant and striking, boosts charisma in social situations.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charisma, 8)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Fair",
+                    "value": 9,
+                    "description": "Delicate yet resilient, adds an ethereal glow that charms enemies.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm_chance, 5%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Thoughtful",
+                    "value": 13,
+                    "description": "A serene expression, creating a calming aura that reduces opponents' aggression.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 10%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Light Blue",
+                    "value": 11,
+                    "description": "Cool and piercing, lowers enemy defense with a glance.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(defense, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img14",
+            "alt": "Isabella - Belle of the Ballroom",
+            "tits": "Ample",
+            "price": "18",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 16,
+                    "description": "Voluminous and captivating, offering a strong defensive presence in any battle.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(defense, 20%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Elegant",
+                    "value": 20,
+                    "description": "Poised with grace, enhances charm and social influence in combat.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charisma, 15%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Hourglass",
+                    "value": 18,
+                    "description": "Curves that mesmerize, distracting enemies and lowering their accuracy.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_accuracy, 10%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Golden Blonde",
+                    "value": 14,
+                    "description": "Radiant and eye-catching, boosts charisma during social interactions.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charisma, 12%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Radiant Glow",
+                    "value": 10,
+                    "description": "A radiant glow that enchants opponents, reducing their defense.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(defense, 8%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Confident",
+                    "value": 17,
+                    "description": "A gaze of unwavering confidence, lowering opponents' aggression.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 15%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Light Blue",
+                    "value": 12,
+                    "description": "Cold and piercing, causing hesitation in enemies and reducing their next attack.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_next_attack, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img15",
+            "alt": "Valentina - The Crimson Temptress",
+            "tits": "Voluptuous",
+            "price": "20",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Voluptuous",
+                    "value": 18,
+                    "description": "Full and captivating, offering strong defensive and offensive capabilities.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(defense, 20%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Alluring",
+                    "value": 22,
+                    "description": "A seductive stance that lowers the defenses of her enemies and amplifies her charisma.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charisma, 20%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Curvy",
+                    "value": 17,
+                    "description": "A figure designed to mesmerize, decreasing the accuracy of her opponents.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_accuracy, 15%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Golden Auburn",
+                    "value": 12,
+                    "description": "A radiant cascade of golden auburn locks that shines brightly in battle, boosting her charm.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charisma, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Radiant Glow",
+                    "value": 10,
+                    "description": "A warm, radiant glow that entices enemies, reducing their defenses.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(defense, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Mysterious",
+                    "value": 15,
+                    "description": "An enigmatic gaze that keeps her intentions hidden, lowering opponents' attack power.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 15%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Hazel",
+                    "value": 14,
+                    "description": "Her hazel eyes pierce through the strongest defenses, reducing opponent's next attack.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_next_attack, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img16",
+            "alt": "Lena - The Enchantress",
+            "tits": "Ample",
+            "price": "18",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 16,
+                    "description": "Generous and captivating, providing a powerful defensive boost.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(defense, 15%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Regal",
+                    "value": 20,
+                    "description": "Her commanding presence intimidates foes, lowering their attack power.",
+                    "effect": "buff",
+                    "modifier": "reduce_stat(opponent_attack, 20%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Elegant",
+                    "value": 14,
+                    "description": "A figure that exudes grace and charm, boosting her evasion in battle.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 10%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Platinum Blonde",
+                    "value": 12,
+                    "description": "Her radiant platinum hair shines like a beacon, increasing her charisma.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charisma, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Porcelain",
+                    "value": 10,
+                    "description": "Her flawless complexion adds a layer of mystery, making her harder to hit.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(dodge, 5%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Focused",
+                    "value": 17,
+                    "description": "Her steely gaze locks in on her target, reducing their defenses.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_defense, 10%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Icy Blue",
+                    "value": 15,
+                    "description": "Cold and calculating, her icy blue eyes freeze opponents in their tracks, lowering their speed.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_speed, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img17",
+            "alt": "Seraphina - The Golden Rose",
+            "tits": "Perky",
+            "price": "15",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 10,
+                    "description": "Sharp and alluring, delivering fast and decisive attacks.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(attack_speed, 12%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Graceful",
+                    "value": 18,
+                    "description": "A poised stance that enhances her charm and confidence.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charisma, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Sculpted",
+                    "value": 13,
+                    "description": "A figure that combines grace and strength, improving her agility.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 8%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Golden Blonde",
+                    "value": 14,
+                    "description": "Her shining hair reflects her inner strength, boosting her attack.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(attack, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Radiant",
+                    "value": 12,
+                    "description": "Her glowing skin mesmerizes opponents, lowering their defenses.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_defense, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Confident",
+                    "value": 16,
+                    "description": "Her unwavering confidence weakens her enemies' resolve.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 10%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Crystal Blue",
+                    "value": 15,
+                    "description": "Her piercing blue eyes captivate and disorient, making it harder for enemies to land hits.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(dodge, 5%)"
+                }
+            ]
+        },
+        {
+            "src": "img18",
+            "alt": "Isadora - The Crimson Enchantress",
+            "tits": "Ample",
+            "price": "18",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 15,
+                    "description": "Her full figure provides powerful protection, reducing incoming damage.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(incoming_damage, 15%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Regal",
+                    "value": 20,
+                    "description": "An elegant and commanding presence that strikes fear in her enemies.",
+                    "effect": "buff",
+                    "modifier": "reduce_stat(opponent_attack, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Hourglass",
+                    "value": 18,
+                    "description": "A balanced physique, perfect for withstanding attacks and delivering powerful blows.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(health, 15%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Chestnut Brown",
+                    "value": 12,
+                    "description": "Deep and sultry, adding a mysterious allure.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Warm Olive",
+                    "value": 14,
+                    "description": "Her radiant skin distracts opponents, lowering their defenses.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_defense, 8%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Fierce",
+                    "value": 16,
+                    "description": "Her piercing gaze can bring opponents to their knees.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(critical_hit_chance, 10%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Dark Hazel",
+                    "value": 13,
+                    "description": "Eyes that reveal little, keeping her true intentions hidden.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(dodge, 7%)"
+                }
+            ]
+        },
+        {
+            "src": "img19",
+            "alt": "Arabella - The Desert Jewel",
+            "tits": "Luscious",
+            "price": "20",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Luscious",
+                    "value": 16,
+                    "description": "Her ample figure offers formidable protection, reducing incoming damage significantly.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(incoming_damage, 20%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Majestic",
+                    "value": 22,
+                    "description": "Standing tall and proud, she commands the respect of all around her, boosting team morale.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(team_charisma, 15%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Curvaceous",
+                    "value": 20,
+                    "description": "Her curves are as deadly as they are mesmerizing, offering both offense and defense.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(health, 18%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Sandy Brown",
+                    "value": 12,
+                    "description": "Rich and smooth, her hair reflects the warm hues of the desert.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Golden Tan",
+                    "value": 14,
+                    "description": "Her sun-kissed skin boosts her resistance against all elemental attacks.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(resistance_to_elemental_attacks, 15%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Serene Confidence",
+                    "value": 18,
+                    "description": "Her calm demeanor under pressure unnerves enemies, lowering their attack.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 12%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Dark Amber",
+                    "value": 13,
+                    "description": "Her piercing gaze can strip away the confidence of those who dare challenge her.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_defense, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img20",
+            "alt": "Li Mei - The Golden Lotus",
+            "tits": "Luscious",
+            "price": "22",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Luscious",
+                    "value": 17,
+                    "description": "Full and graceful, her presence alone is enough to ward off weaker foes.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 15%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Serene",
+                    "value": 20,
+                    "description": "Her calm and collected stance unnerves enemies, boosting her resilience in combat.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(resilience, 12%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Hourglass",
+                    "value": 18,
+                    "description": "Her perfect form offers both allure and strength, enhancing her battle capabilities.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(attack, 10%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Raven Black",
+                    "value": 12,
+                    "description": "Dark and sleek, her hair flows like silk, adding to her charm and mystery.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 8%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Golden Glow",
+                    "value": 15,
+                    "description": "Her skin shines like the sun, increasing her defense against elemental attacks.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(elemental_resistance, 15%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Unyielding",
+                    "value": 22,
+                    "description": "Her fierce gaze can make even the bravest of warriors falter, reducing their accuracy.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_accuracy, 12%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Deep Brown",
+                    "value": 14,
+                    "description": "Her eyes reveal wisdom and strength, helping her anticipate enemy movements.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img21",
+            "alt": "Selene - The Agile Adventurer",
+            "tits": "Petite",
+            "price": "15",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Luscious",
+                    "value": 8,
+                    "description": "Small but fierce, allowing for quick and agile movements.",
+                    "effect": "agility",
+                    "modifier": "increase_stat(agility, 15%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Casual Confidence",
+                    "value": 18,
+                    "description": "Her relaxed stance shows she’s always ready for a challenge.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_intimidation, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Athletic",
+                    "value": 16,
+                    "description": "Strong and toned, she’s built for endurance and power.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(attack, 12%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Sandy Blonde",
+                    "value": 9,
+                    "description": "Soft, golden, and full of energy, enhancing her charisma.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Sun-Kissed",
+                    "value": 13,
+                    "description": "Her radiant glow reflects hours spent outdoors, adding to her resilience.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(resilience, 8%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Focused",
+                    "value": 14,
+                    "description": "Her sharp focus allows her to react swiftly to threats.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 10%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Hazel",
+                    "value": 12,
+                    "description": "Her striking eyes offer a blend of warmth and intensity, catching opponents off guard.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_defense, 8%)"
+                }
+            ]
+        },
+        {
+            "src": "img22",
+            "alt": "Aurora - The Enchanted Dream",
+            "tits": "Ample",
+            "price": "16",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 14,
+                    "description": "Full and enchanting, offering both allure and defense.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(defense, 12%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Rosy Pink",
+                    "value": 12,
+                    "description": "A rare and soft pink hue that mesmerizes and distracts enemies.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 15%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Graceful Kneeling",
+                    "value": 18,
+                    "description": "A serene and powerful pose, lowering enemies' aggression.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Porcelain Glow",
+                    "value": 10,
+                    "description": "A delicate, ethereal glow that makes her seem otherworldly.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charisma, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Hourglass",
+                    "value": 14,
+                    "description": "A balanced and captivating figure, enhancing her presence on the battlefield.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(health, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Innocent Beauty",
+                    "value": 16,
+                    "description": "A soft gaze that hides immense strength, confusing opponents.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_defense, 12%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Light Blue",
+                    "value": 11,
+                    "description": "Her piercing light blue eyes captivate and weaken the resolve of her foes.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_evasion, 8%)"
+                }
+            ]
+        },
+        {
+            "src": "img23",
+            "alt": "Valeria - Keeper of Secrets",
+            "tits": "Perky",
+            "price": "14",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 12,
+                    "description": "Sharp and enticing, offers both speed and precision in attacks.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(attack_speed, 12%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Dark Brown",
+                    "value": 10,
+                    "description": "A flowing cascade of dark locks that adds mystery and allure.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Serene Confidence",
+                    "value": 18,
+                    "description": "A calm and composed stance that reduces enemy aggression.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 8%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Olive Radiance",
+                    "value": 9,
+                    "description": "Her glowing skin speaks of a life kissed by the sun, boosting resilience.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(resilience, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Slim",
+                    "value": 10,
+                    "description": "Light and agile, allowing her to dodge incoming attacks with ease.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(dodge, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Determined",
+                    "value": 16,
+                    "description": "Her focused gaze challenges opponents, lowering their defenses.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_defense, 15%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Dark Brown",
+                    "value": 11,
+                    "description": "Her intense dark eyes captivate and disarm, reducing enemy strategy.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_strategy, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img24",
+            "alt": "Calista - The Midnight Muse",
+            "tits": "Alluring",
+            "price": "16",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 17,
+                    "description": "Captivating and irresistible, these traits draw attention while fortifying her defenses.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(health, 18%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Chestnut Glow",
+                    "value": 10,
+                    "description": "Warm and inviting with a mysterious edge—boosts her presence in dark places.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(attack, 12%) in shadowy environments"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Smoky Amber",
+                    "value": 9,
+                    "description": "Her piercing gaze leaves opponents feeling exposed and vulnerable.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_dodge, 15%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Sculpted",
+                    "value": 13,
+                    "description": "Her strong and striking figure enhances her agility in battle.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 10%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Regal",
+                    "value": 19,
+                    "description": "Her presence commands attention and respect, reducing opponent’s attack power.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(attack, 18%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Golden Radiance",
+                    "value": 8,
+                    "description": "Her skin shimmers with a warm glow, boosting her charisma in social encounters.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 12%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Seductive Power",
+                    "value": 14,
+                    "description": "A mix of allure and authority, her expression leaves opponents off-balance.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 12%)"
+                }
+            ]
+        },
+        {
+            "src": "img25",
+            "alt": "Zephyra - The Whispering Breeze",
+            "tits": "Ethereal",
+            "price": "18",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 15,
+                    "description": "Light and delicate, yet full of unseen power. Increases defense in mental battles.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(mental_resilience, 15%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Obsidian Twilight",
+                    "value": 12,
+                    "description": "Dark, with a shimmer of silver, flowing like a breeze through the night sky.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(speed, 10%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Silver Mist",
+                    "value": 11,
+                    "description": "Piercing and mystical, her gaze bewilders foes, lowering their accuracy.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_accuracy, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Willowy",
+                    "value": 14,
+                    "description": "Tall and slender, giving her the grace and flexibility of a breeze.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(evasion, 15%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Enigmatic",
+                    "value": 18,
+                    "description": "Her subtle movements make it impossible to predict her next action.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 20%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Luminous Frost",
+                    "value": 9,
+                    "description": "A faint glow like dawn's first light, captivating those who see her.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Dreamlike Calm",
+                    "value": 16,
+                    "description": "Serenely detached, her expression throws opponents off balance.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_focus, 15%)"
+                }
+            ]
+        },
+        {
+            "src": "img26",
+            "alt": "Marisol - The Enchanting Gem",
+            "tits": "Voluptuous",
+            "price": "16",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 15,
+                    "description": "Full and captivating, providing added protection and allure.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(defense, 15%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Golden Blonde",
+                    "value": 12,
+                    "description": "Shining like the morning sun, her hair boosts her charm and confidence.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Hazel",
+                    "value": 10,
+                    "description": "Soft and warm, her gaze lowers an opponent’s guard.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_defense, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Curvy",
+                    "value": 14,
+                    "description": "With curves that command attention, she easily dodges attacks.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 15%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Graceful",
+                    "value": 18,
+                    "description": "Moves with an elegant poise that mesmerizes her opponents.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 20%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Radiant Glow",
+                    "value": 10,
+                    "description": "A soft, sun-kissed glow that enhances her overall presence.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charisma, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Confident",
+                    "value": 16,
+                    "description": "Her unwavering confidence intimidates opponents, weakening their attacks.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_attack, 15%)"
+                }
+            ]
+        },
+        {
+            "src": "img27",
+            "alt": "Ximena - The Cascading Beauty",
+            "tits": "Ample",
+            "price": "14",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 14,
+                    "description": "Lush and captivating, her presence shields her from harm.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(health, 15%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Chestnut Brown",
+                    "value": 12,
+                    "description": "Her rich, flowing hair enchants those who dare gaze upon her.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 12%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Amber",
+                    "value": 11,
+                    "description": "Eyes that shimmer with intensity, disarming any threat.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_focus, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Voluptuous",
+                    "value": 14,
+                    "description": "Her balanced curves give her an edge in agility and charm.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 12%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Graceful",
+                    "value": 15,
+                    "description": "A poised stance that keeps enemies on their toes.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Golden Glow",
+                    "value": 10,
+                    "description": "Her skin radiates confidence, enhancing her resilience.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(defense, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Siren's Smile",
+                    "value": 16,
+                    "description": "Her seductive smile weakens her foes' defenses.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_defense, 15%)"
+                }
+            ]
+        },
+        {
+            "src": "img28",
+            "alt": "Anastasia - Frosted Beauty",
+            "tits": "Snowy Charm",
+            "price": "12",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 12,
+                    "description": "Soft, elegant, and resilient like freshly fallen snow.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(cold_resistance, 10%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Golden Blonde",
+                    "value": 10,
+                    "description": "Shines brightly even in the coldest of winters.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 8%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Ice Blue",
+                    "value": 12,
+                    "description": "Her clear blue eyes captivate with their cool intensity.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_focus, 5%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Slender",
+                    "value": 10,
+                    "description": "Her graceful figure moves effortlessly through the cold.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 8%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Graceful",
+                    "value": 14,
+                    "description": "She holds herself with natural elegance.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 5%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Pale Glow",
+                    "value": 8,
+                    "description": "Her fair skin radiates warmth even in frosty weather.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(beauty, 5%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Serene",
+                    "value": 10,
+                    "description": "Her calm and collected nature puts others at ease.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_defense, 8%)"
+                }
+            ]
+        },
+        {
+            "src": "img29",
+            "alt": "Freja - Nordic Enchantress",
+            "tits": "Heavenly",
+            "price": "12",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Luscious",
+                    "value": 14,
+                    "description": "Soft yet firm, like clouds that cradle the sky.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(beauty, 10%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Golden Blonde",
+                    "value": 10,
+                    "description": "Her golden locks shimmer like sunlight on water.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 8%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Crystal Blue",
+                    "value": 12,
+                    "description": "Her gaze, cool and clear as the northern seas.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_focus, 5%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Elegant",
+                    "value": 11,
+                    "description": "Her graceful posture turns heads wherever she goes.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(agility, 5%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Ethereal",
+                    "value": 14,
+                    "description": "She moves with a presence that feels otherworldly.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 5%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Ivory Glow",
+                    "value": 10,
+                    "description": "Her fair skin glows with a soft, luminous light.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(beauty, 8%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Dreamy",
+                    "value": 9,
+                    "description": "Her serene expression exudes calm and allure.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_confidence, 5%)"
+                }
+            ]
+        },
+        {
+            "src": "img30",
+            "alt": "Charlotte - The Morning Light",
+            "tits": "Radiant",
+            "price": "10",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 12,
+                    "description": "Soft and inviting, with a glow that mesmerizes.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Golden Blonde",
+                    "value": 10,
+                    "description": "Her flowing blonde hair catches the light perfectly.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(grace, 8%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Soft Blue",
+                    "value": 9,
+                    "description": "Her calm, blue eyes are as soothing as the sky.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_focus, 5%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Graceful",
+                    "value": 11,
+                    "description": "Moves with the effortless grace of royalty.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(agility, 5%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Serene",
+                    "value": 13,
+                    "description": "A quiet confidence that draws in attention.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 5%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Ivory Glow",
+                    "value": 10,
+                    "description": "Her porcelain skin reflects the morning light.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(beauty, 8%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Peaceful",
+                    "value": 9,
+                    "description": "Her serene face radiates tranquility.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_confidence, 5%)"
+                }
+            ]
+        },
+        {
+            "src": "img31",
+            "alt": "Colette - The Evening Whisper",
+            "tits": "Delicate",
+            "price": "10",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 11,
+                    "description": "Soft yet alluring, with a subtle charm that captivates.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(grace, 10%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Chestnut Brown",
+                    "value": 9,
+                    "description": "Her lustrous brown hair shimmers in the candlelight.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charisma, 8%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Emerald Green",
+                    "value": 10,
+                    "description": "Eyes that sparkle with intelligence and intrigue.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_focus, 5%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Svelte",
+                    "value": 12,
+                    "description": "Her slim figure exudes elegance and grace.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(agility, 8%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Poised",
+                    "value": 14,
+                    "description": "Standing with perfect posture, always calm and collected.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Rosy Glow",
+                    "value": 10,
+                    "description": "Her fair skin carries a natural blush, radiating warmth.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(beauty, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Charming Smile",
+                    "value": 13,
+                    "description": "Her soft smile disarms even the strongest of wills.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 12%)"
+                }
+            ]
+        },
+        {
+            "src": "img32",
+            "alt": "Elowen - The Blossom of Avalon",
+            "tits": "Graceful",
+            "price": "11",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 10,
+                    "description": "Elegant and enticing, with a subtle allure.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Ash Brown",
+                    "value": 9,
+                    "description": "Soft and flowing, her hair reflects her calm demeanor.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(resilience, 5%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Jade Green",
+                    "value": 11,
+                    "description": "Eyes that seem to see through to your very soul.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_focus, 5%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Shapely",
+                    "value": 13,
+                    "description": "Her figure exudes both strength and beauty.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(endurance, 8%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Relaxed",
+                    "value": 14,
+                    "description": "Her ease and composure put everyone around her at ease.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(focus, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Flawless Ivory",
+                    "value": 12,
+                    "description": "Her skin is as smooth as porcelain, radiating a gentle glow.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(elegance, 12%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Enchanting Smile",
+                    "value": 15,
+                    "description": "Her smile can melt hearts and disarm foes alike.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_resistance, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img33",
+            "alt": "Leilani - The Island Breeze",
+            "tits": "Tropical",
+            "price": "11",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Luscious",
+                    "value": 10,
+                    "description": "Bright and alluring, with the warmth of the island sun.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Sun-Kissed Brown",
+                    "value": 9,
+                    "description": "Soft, flowing waves reminiscent of the ocean breeze.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 5%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Ocean Blue",
+                    "value": 11,
+                    "description": "Deep and calming, like the waters of the Pacific.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_defense, 5%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Island Curves",
+                    "value": 13,
+                    "description": "Naturally toned from the beauty of island life.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(flexibility, 8%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Carefree",
+                    "value": 14,
+                    "description": "Her relaxed confidence makes her irresistible.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Golden Tan",
+                    "value": 12,
+                    "description": "Her skin glows with the warmth of the sun.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(resilience, 12%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Playful Smile",
+                    "value": 15,
+                    "description": "Her smile is like a gentle ocean wave, drawing you in.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_focus, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img34",
+            "alt": "Noelani - The Whisper of the Waves",
+            "tits": "Island Blossom",
+            "price": "12",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 12,
+                    "description": "Soft, alluring, and full of life, much like the flowers she wears.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charisma, 12%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Midnight Waves",
+                    "value": 11,
+                    "description": "Flowing dark locks that reflect the beauty of a moonlit sea.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 7%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Coconut Brown",
+                    "value": 10,
+                    "description": "Warm and inviting, her gaze can put anyone at ease.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_defense, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Tropical Grace",
+                    "value": 14,
+                    "description": "Shaped by the island's beauty, her movements are fluid and elegant.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(flexibility, 10%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Ocean Breeze",
+                    "value": 13,
+                    "description": "Effortless and captivating, much like the gentle winds by the shore.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 12%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Sunkissed Glow",
+                    "value": 15,
+                    "description": "Her skin shines with the radiance of the sun.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(resilience, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Serene Smile",
+                    "value": 14,
+                    "description": "Her calm demeanor can ease even the most turbulent storms.",
+                    "effect": "attack",
+                    "modifier": "reduce_stat(opponent_focus, 8%)"
+                }
+            ]
+        },
+        {
+            "src": "img35",
+            "alt": "Maeve - The Enchantress of Emerald Glades",
+            "tits": "Emerald Blossom",
+            "price": "14",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 12,
+                    "description": "Full and graceful, blooming with natural beauty.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 15%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Golden Auburn",
+                    "value": 10,
+                    "description": "Sun-kissed with a fiery hue, as radiant as the Irish sun.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(attack_power, 10%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Forest Green",
+                    "value": 11,
+                    "description": "Eyes as deep as the Irish woods, drawing others in with a glance.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_focus, 12%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Willow Grace",
+                    "value": 13,
+                    "description": "Elegant and slender, able to move effortlessly with grace.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 8%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Quiet Confidence",
+                    "value": 14,
+                    "description": "Her poised stance is calm, yet powerful, commanding attention.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(confidence, 15%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Celtic Glow",
+                    "value": 12,
+                    "description": "A radiant glow that hints at her inner strength and resilience.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(health, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Gentle Allure",
+                    "value": 16,
+                    "description": "Her soft gaze and kind demeanor can charm even the coldest hearts.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 12%)"
+                }
+            ]
+        },
+        {
+            "src": "img36",
+            "alt": "Elin - The Satin Whisper",
+            "tits": "Velvet Dew",
+            "price": "13",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 11,
+                    "description": "Soft yet striking, like a dew-covered flower in the morning sun.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Golden Blonde",
+                    "value": 9,
+                    "description": "Glowing strands of sunlight that captivate and charm.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(allure, 8%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Pale Blue",
+                    "value": 12,
+                    "description": "Icy and clear, revealing her focused determination.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_attack, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Graceful",
+                    "value": 10,
+                    "description": "She moves with elegance and poise, like a swan gliding through calm waters.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 12%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Serene",
+                    "value": 14,
+                    "description": "Her calm presence in the room commands respect and admiration.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(confidence, 12%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Porcelain Softness",
+                    "value": 12,
+                    "description": "Delicate and flawless, with a hint of blush.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 15%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Quiet Elegance",
+                    "value": 15,
+                    "description": "A gentle gaze that holds untold stories, drawing others in.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(persuasion, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img37",
+            "alt": "Isidora - The Blooming Flame",
+            "tits": "Floral Ember",
+            "price": "14",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 12,
+                    "description": "As delicate as a flower but with a fiery core. She captivates while commanding attention.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(allure, 15%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Copper Red",
+                    "value": 10,
+                    "description": "Fiery yet earthy, a mix of passion and grounded elegance.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(charisma, 8%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Soft Brown",
+                    "value": 11,
+                    "description": "Warm and welcoming, yet sharp enough to see through deception.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_defense, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Slender",
+                    "value": 10,
+                    "description": "A delicate frame with the agility to outmaneuver.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 15%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Graceful",
+                    "value": 14,
+                    "description": "Every movement is like a dance, graceful and captivating.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(persuasion, 12%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Sun-Kissed Glow",
+                    "value": 13,
+                    "description": "Her skin glows with warmth, radiating vitality and health.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Serene Allure",
+                    "value": 12,
+                    "description": "Her calm gaze can soothe hearts or steal them away.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(focus, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img38",
+            "alt": "Almira - The Velvet Rose",
+            "tits": "Velvet Touch",
+            "price": "15",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Luscious",
+                    "value": 14,
+                    "description": "Soft and enticing, her allure makes opponents weak in the knees.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(allure, 20%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Midnight Black",
+                    "value": 12,
+                    "description": "Dark and mysterious, like a Cuban night—perfect for drawing attention.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(charisma, 10%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Golden Brown",
+                    "value": 10,
+                    "description": "Her warm gaze can melt even the coldest hearts.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_defense, 12%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Curvaceous",
+                    "value": 13,
+                    "description": "A body sculpted by the tropical sun, accentuating every move.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(agility, 15%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Sultry",
+                    "value": 16,
+                    "description": "Her every glance is a promise of something more, drawing attention effortlessly.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(charm, 12%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Honeyed Bronze",
+                    "value": 14,
+                    "description": "Her skin gleams with a warm, sun-kissed glow.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(defense, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Playful Gaze",
+                    "value": 12,
+                    "description": "Her eyes hint at mischief, making her difficult to predict.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(dodge, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img40",
+            "alt": "Paloma - The Serene Waterfall",
+            "tits": "Sculpted Grace",
+            "price": "14",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 15,
+                    "description": "Her form is mesmerizing, like a perfectly carved statue—capturing hearts with every glance.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(allure, 15%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Ebony Waves",
+                    "value": 10,
+                    "description": "Flowing black curls that ripple like a tranquil waterfall, adding to her ethereal beauty.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(dodge, 10%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Hazel Radiance",
+                    "value": 12,
+                    "description": "Her eyes shine with a natural glow that pulls people in, lowering their guard.",
+                    "effect": "charm",
+                    "modifier": "reduce_stat(opponent_resistance, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Graceful Silhouette",
+                    "value": 14,
+                    "description": "Her lithe figure allows her to move with unmatched elegance, boosting her agility.",
+                    "effect": "attack",
+                    "modifier": "increase_stat(agility, 12%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Soft Serenity",
+                    "value": 16,
+                    "description": "She exudes a calmness that contrasts with her inner strength, unsettling opponents.",
+                    "effect": "defense",
+                    "modifier": "reduce_stat(opponent_accuracy, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Sun-Kissed Olive",
+                    "value": 13,
+                    "description": "Her skin is a rich, warm hue, kissed by the Mediterranean sun, adding to her allure.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Enchanting Smile",
+                    "value": 14,
+                    "description": "A smile that disarms even the most guarded hearts, making it difficult to resist her charm.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(charm_resistance, 12%)"
+                }
+            ]
+        },
+        {
+            "src": "img41",
+            "alt": "Lúcia - The Brazilian Muse",
+            "tits": "Floral Grace",
+            "price": "15",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 16,
+                    "description": "Like a blooming garden, her presence captivates and enchants effortlessly.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(charm, 15%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Midnight Curls",
+                    "value": 12,
+                    "description": "Deep, flowing waves of dark curls that add mystery and allure.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(allure, 10%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Dark Almond",
+                    "value": 14,
+                    "description": "Eyes as deep as the Amazon, holding untold stories and dreams.",
+                    "effect": "charm",
+                    "modifier": "reduce_stat(opponent_willpower, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Exotic Curves",
+                    "value": 18,
+                    "description": "Her body moves like the rhythm of a samba, mesmerizing all who watch.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(dodge, 15%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Confident Glow",
+                    "value": 17,
+                    "description": "She stands tall, exuding confidence that makes everyone stop and stare.",
+                    "effect": "charm",
+                    "modifier": "reduce_stat(opponent_attack, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Golden Bronze",
+                    "value": 13,
+                    "description": "Sun-kissed skin that reflects her vibrant heritage and natural beauty.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm_resistance, 12%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Mischievous Smile",
+                    "value": 15,
+                    "description": "A playful grin that makes you question what she’s thinking, lowering your guard.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(allure, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img42",
+            "alt": "Elodie - The Provençal Flower",
+            "tits": "Lavender Softness",
+            "price": "13",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 14,
+                    "description": "As soft and delicate as the lavender fields of Provence, charming all with her grace.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(charm, 12%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Sun-Kissed Brown",
+                    "value": 10,
+                    "description": "Warm and inviting, her hair glows like the golden fields at sunset.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(allure, 10%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Green Pastures",
+                    "value": 11,
+                    "description": "Her eyes hold the beauty of Provence's rolling green hills, captivating all who gaze into them.",
+                    "effect": "charm",
+                    "modifier": "reduce_stat(opponent_defense, 8%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Slim Grace",
+                    "value": 14,
+                    "description": "Her slender figure allows her to move with elegance and poise.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 15%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Playful Smile",
+                    "value": 12,
+                    "description": "A playful smile that disarms even the toughest of hearts.",
+                    "effect": "charm",
+                    "modifier": "reduce_stat(opponent_attack, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Rosy Glow",
+                    "value": 13,
+                    "description": "Her glowing skin has a natural warmth, reminiscent of the Provence sun.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(healing, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Gentle Gaze",
+                    "value": 14,
+                    "description": "Her gentle gaze melts even the coldest of defenses.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(allure, 12%)"
+                }
+            ]
+        },
+        {
+            "src": "img43",
+            "alt": "Yasmin - The Golden Blossom",
+            "tits": "Golden Petals",
+            "price": "14",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Luscious",
+                    "value": 14,
+                    "description": "As radiant as the Brazilian sun, her figure enchants all who approach.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(charm, 12%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Sunlit Blonde",
+                    "value": 10,
+                    "description": "Her hair shines like strands of gold, a beacon of allure.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(allure, 10%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Ocean Blue",
+                    "value": 11,
+                    "description": "Her eyes reflect the deep, serene blues of the Brazilian coast, captivating all who gaze into them.",
+                    "effect": "charm",
+                    "modifier": "reduce_stat(opponent_defense, 8%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Curvaceous Elegance",
+                    "value": 13,
+                    "description": "Her perfectly toned body exudes strength and grace, turning heads effortlessly.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 12%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Confident",
+                    "value": 15,
+                    "description": "Standing tall with confidence, her presence commands attention.",
+                    "effect": "charm",
+                    "modifier": "reduce_stat(opponent_attack, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Sun-Kissed Glow",
+                    "value": 13,
+                    "description": "Her glowing skin carries the warmth of Brazil’s tropical sun.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(allure, 10%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Playful Glance",
+                    "value": 12,
+                    "description": "Her playful smile can make anyone’s heart skip a beat.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(charm, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img44",
+            "alt": "Layla - Desert Enchantment",
+            "tits": "Moonlit Oasis",
+            "price": "16",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 16,
+                    "description": "As mesmerizing as the tranquil nights under a desert sky, her figure captivates effortlessly.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(charm, 14%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Ebony Waves",
+                    "value": 12,
+                    "description": "Her dark, wavy hair flows like the gentle desert wind at dusk.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(allure, 11%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Desert Sand",
+                    "value": 14,
+                    "description": "Her warm brown eyes reflect the depth of the endless desert, holding mystery and allure.",
+                    "effect": "charm",
+                    "modifier": "reduce_stat(opponent_defense, 9%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Graceful Curves",
+                    "value": 15,
+                    "description": "Her silhouette exudes grace and beauty, making her an irresistible vision.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 13%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Elegance",
+                    "value": 17,
+                    "description": "Her poised stance mirrors the dignity of ancient queens of the Arabian desert.",
+                    "effect": "charm",
+                    "modifier": "reduce_stat(opponent_attack, 11%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Sun-Kissed Glow",
+                    "value": 14,
+                    "description": "Her bronzed skin reflects the warmth of the Arabian sun.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(allure, 12%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Siren's Smile",
+                    "value": 13,
+                    "description": "Her subtle smile is an invitation to those brave enough to approach.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(charm, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img45",
+            "alt": "Thalassa - Ocean's Grace",
+            "tits": "Ivory Serenity",
+            "price": "16",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 16,
+                    "description": "Her soft, graceful beauty is as calming as the still waters of the Aegean Sea.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(charm, 14%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Midnight Waves",
+                    "value": 13,
+                    "description": "Her flowing dark hair mirrors the shimmering waves beneath a starry Grecian sky.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(allure, 12%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Elysian Blue",
+                    "value": 15,
+                    "description": "Her blue eyes are reminiscent of the tranquil, crystal-clear waters of Greece's most hidden beaches.",
+                    "effect": "charm",
+                    "modifier": "reduce_stat(opponent_defense, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Goddess Grace",
+                    "value": 18,
+                    "description": "With the elegance of Aphrodite herself, her figure commands attention and awe.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 15%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Hellenic Poise",
+                    "value": 17,
+                    "description": "She stands with a noble bearing, like a muse from ancient Greece.",
+                    "effect": "charm",
+                    "modifier": "reduce_stat(opponent_attack, 12%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Golden Dawn",
+                    "value": 14,
+                    "description": "Her sun-kissed skin glows like the first light of a Greek sunrise.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(allure, 13%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Muse's Whisper",
+                    "value": 12,
+                    "description": "Her soft smile evokes the whispers of muses, inspiring those fortunate to gaze upon her.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(charm, 11%)"
+                }
+            ]
+        },
+        {
+            "src": "img46",
+            "alt": "Anastazja - Winter’s Blossom",
+            "tits": "Rose Frost",
+            "price": "17",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Luscious",
+                    "value": 17,
+                    "description": "Delicate yet striking, like the first bloom in a snowy landscape.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(allure, 14%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Golden Sleigh Bells",
+                    "value": 15,
+                    "description": "Her flowing golden hair shines against the white of winter, as captivating as holiday bells in the cold air.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 12%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Icy Sapphire",
+                    "value": 18,
+                    "description": "Her bright blue eyes are as piercing as the clearest ice in the heart of Eastern Europe.",
+                    "effect": "debuff",
+                    "modifier": "reduce_stat(opponent_defense, 15%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Snowfall Grace",
+                    "value": 19,
+                    "description": "Her figure flows as naturally as a fresh snowfall, leaving an impression of elegance and beauty.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 13%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Winter’s Elegance",
+                    "value": 19,
+                    "description": "Her poised stance in the snow commands attention, blending grace with the beauty of winter.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(allure, 15%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Snowy Radiance",
+                    "value": 16,
+                    "description": "Her pale skin glows in the cold light, giving her an ethereal presence like a winter spirit.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 12%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Frosted Serenity",
+                    "value": 13,
+                    "description": "Her calm expression reflects the stillness of a snowy winter’s night, serene yet powerful.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(charm, 10%)"
+                }
+            ]
+        },
+        {
+            "src": "img47",
+            "alt": "Elisabeth - Alpine Beauty",
+            "tits": "Ivory Peaks",
+            "price": "18",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 18,
+                    "description": "As graceful and majestic as the snow-capped Swiss Alps.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(allure, 15%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Golden Edelweiss",
+                    "value": 16,
+                    "description": "Her long, flowing golden hair mirrors the beauty of the rare Edelweiss flower in the Swiss mountains.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 14%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Glacial Blue",
+                    "value": 17,
+                    "description": "Her blue eyes shine like the pristine, glacial waters of Switzerland's lakes.",
+                    "effect": "debuff",
+                    "modifier": "reduce_stat(opponent_defense, 12%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Mountain Grace",
+                    "value": 19,
+                    "description": "Her figure, like the sharp peaks of the Alps, is stunningly captivating.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 13%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Swiss Elegance",
+                    "value": 18,
+                    "description": "Her elegant stance embodies the poised and serene beauty of a Swiss maiden.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(allure, 16%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Snowy Radiance",
+                    "value": 16,
+                    "description": "Her fair skin glows like the first light reflecting on the fresh snow of the Swiss Alps.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 12%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Alpine Serenity",
+                    "value": 14,
+                    "description": "Her serene expression is as calming as the peaceful Swiss valleys, inspiring tranquility.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(charm, 11%)"
+                }
+            ]
+        },
+        {
+            "src": "img48",
+            "alt": "Lorelei - Scarlet Siren",
+            "tits": "Crimson Grace",
+            "price": "17",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 17,
+                    "description": "Her alluring presence is as captivating as the legendary sirens of the Rhine.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(allure, 14%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Golden Waves",
+                    "value": 18,
+                    "description": "Her flowing golden curls resemble the Rhine's shimmering currents, catching the light beautifully.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 13%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Rhine Blue",
+                    "value": 16,
+                    "description": "Her blue eyes shine like the deep, mysterious waters of the Rhine River.",
+                    "effect": "debuff",
+                    "modifier": "reduce_stat(opponent_defense, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Germanic Elegance",
+                    "value": 19,
+                    "description": "Her figure exudes the elegance of a true German beauty, both regal and enticing.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 12%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Bavarian Poise",
+                    "value": 16,
+                    "description": "She stands tall with a noble bearing, evoking the grace of a Bavarian noblewoman.",
+                    "effect": "charm",
+                    "modifier": "reduce_stat(opponent_attack, 12%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Rosy Frost",
+                    "value": 14,
+                    "description": "Her skin glows with a delicate, rosy blush like a winter bloom in the Alps.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(allure, 13%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Teutonic Allure",
+                    "value": 15,
+                    "description": "Her soft smile and piercing gaze evoke the legendary beauties of German folklore.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(charm, 11%)"
+                }
+            ]
+        },
+        {
+            "src": "img49",
+            "alt": "Maple - Garden Muse",
+            "tits": "Radiant Presence",
+            "price": "20",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Perky",
+                    "value": 20,
+                    "description": "Her presence brightens the garden like a sunny day.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(allure, 15%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Golden Green",
+                    "value": 19,
+                    "description": "Her golden blonde hair with green tips reflects nature's beauty.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 12%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Emerald Gaze",
+                    "value": 17,
+                    "description": "Her green eyes shine like the garden's foliage.",
+                    "effect": "debuff",
+                    "modifier": "reduce_stat(opponent_defense, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Elegant Form",
+                    "value": 18,
+                    "description": "Her figure flows gracefully as she walks.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 10%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Serene Walk",
+                    "value": 16,
+                    "description": "She strolls gently, embodying tranquility.",
+                    "effect": "charm",
+                    "modifier": "reduce_stat(opponent_attack, 10%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Luminous Glow",
+                    "value": 15,
+                    "description": "Her skin has a radiant sun-kissed glow.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(allure, 14%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Joyful Countenance",
+                    "value": 16,
+                    "description": "Her smile radiates warmth and happiness.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(charm, 13%)"
+                }
+            ]
+        },
+        {
+            "src": "img50",
+            "alt": "Mei Ling - Palace Muse",
+            "tits": "Elegant Allure",
+            "price": "25",
+            "traits": [
+                {
+                    "category": "Tits",
+                    "name": "Ample",
+                    "value": 25,
+                    "description": "Her captivating presence enchants all who gaze upon her.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(allure, 18%)"
+                },
+                {
+                    "category": "Hair Color",
+                    "name": "Jet Black",
+                    "value": 22,
+                    "description": "Her jet black hair cascades like a waterfall, framing her face exquisitely.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(charm, 15%)"
+                },
+                {
+                    "category": "Eye Color",
+                    "name": "Deep Brown",
+                    "value": 20,
+                    "description": "Her deep brown eyes hold a mysterious allure, inviting curiosity.",
+                    "effect": "debuff",
+                    "modifier": "reduce_stat(opponent_defense, 10%)"
+                },
+                {
+                    "category": "Figure",
+                    "name": "Regal Elegance",
+                    "value": 24,
+                    "description": "Her figure radiates grace, embodying the essence of refined beauty.",
+                    "effect": "defense",
+                    "modifier": "increase_stat(evasion, 12%)"
+                },
+                {
+                    "category": "Pose",
+                    "name": "Relaxed Grace",
+                    "value": 21,
+                    "description": "Sitting elegantly, she exudes an air of confidence and serenity.",
+                    "effect": "charm",
+                    "modifier": "reduce_stat(opponent_attack, 12%)"
+                },
+                {
+                    "category": "Complexion",
+                    "name": "Silken Radiance",
+                    "value": 19,
+                    "description": "Her skin glows with a soft, silken radiance, highlighting her beauty.",
+                    "effect": "buff",
+                    "modifier": "increase_stat(allure, 16%)"
+                },
+                {
+                    "category": "Expression",
+                    "name": "Enchanting Smile",
+                    "value": 23,
+                    "description": "Her enchanting smile captivates hearts, spreading joy and warmth.",
+                    "effect": "charm",
+                    "modifier": "increase_stat(charm, 17%)"
+                }
+            ]
+        }               
+    ]
+}

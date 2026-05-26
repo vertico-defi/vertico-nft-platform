@@ -1,0 +1,827 @@
+{
+  "Courtiers": [
+    {
+      "CID": "CountessEleanordeVere170",
+      "Name": "Countess Eleanor de Vere",
+      "Description": "Gallery Diplomat",
+      "price": "2.97",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Ample",
+          "value": 17,
+          "description": "Full and enchanting, projecting elegance and strength.",
+          "effect": "defense",
+          "modifier": "increase_stat(defense, 10%)"
+        },
+        {
+          "category": "Location",
+          "name": "Gallery",
+          "value": 19,
+          "description": "Positioned in the heart of the palace, symbolizing grace and poise.",
+          "effect": "buff",
+          "modifier": "increase_stat(charisma, 5)"
+        },
+        {
+          "category": "Attire",
+          "name": "Yellow Skirt",
+          "value": 23,
+          "description": "Radiates warmth and elegance, enhancing her charm.",
+          "effect": "buff",
+          "modifier": "increase_stat(charm, 5)"
+        }
+      ]
+    },    
+    {
+      "CID": "DameCharlotteSinclair170",
+      "Name": "Dame Charlotte Sinclair",
+      "Description": "Beach Hostess",
+      "price": "1.97",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Perky",
+          "value": 19,
+          "description": "Sharp and captivating, enhancing her charm.",
+          "effect": "attack",
+          "modifier": "increase_stat(attack_speed, 15%)"
+        },
+        {
+          "category": "Location",
+          "name": "Beach",
+          "value": 22,
+          "description": "At ease by the waves, exuding confidence.",
+          "effect": "buff",
+          "modifier": "increase_stat(evasion, 10%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Red Bikini",
+          "value": 21,
+          "description": "Bold and striking, boosting allure.",
+          "effect": "charm",
+          "modifier": "increase_stat(charisma, 12)"
+        }
+      ]
+    },
+    {
+      "CID": "MarchionessLydiaPembroke190",
+      "Name": "Marchioness Lydia Pembroke",
+      "Description": "Gardens Emissary",
+      "price": "1.97",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Perky",
+          "value": 18,
+          "description": "Refined and poised, symbolizing grace.",
+          "effect": "buff",
+          "modifier": "increase_stat(charm, 10%)"
+        },
+        {
+          "category": "Location",
+          "name": "Gardens",
+          "value": 23,
+          "description": "At one with nature, radiating serenity.",
+          "effect": "defense",
+          "modifier": "increase_stat(evasion, 10%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Green Skirt",
+          "value": 21,
+          "description": "Vibrant and dignified, enhancing allure.",
+          "effect": "charm",
+          "modifier": "increase_stat(charisma, 12)"
+        }
+      ]
+    },    
+    {
+      "CID": "LadyVivienneSterling190",
+      "Name": "Lady Vivienne Sterling",
+      "Description": "Gallery Envoy",
+      "price": "2.07",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Perky",
+          "value": 18,
+          "description": "Elegant and understated, a mark of poise.",
+          "effect": "buff",
+          "modifier": "increase_stat(grace, 8%)"
+        },
+        {
+          "category": "Location",
+          "name": "Gallery",
+          "value": 23,
+          "description": "Presence that commands quiet attention.",
+          "effect": "defense",
+          "modifier": "reduce_stat(opponent_focus, 10%)"
+        },
+        {
+          "category": "Attire",
+          "name": "White Robe",
+          "value": 19,
+          "description": "Symbol of serenity, heightening influence.",
+          "effect": "charisma",
+          "modifier": "increase_stat(diplomacy, 12)"
+        }
+      ]
+    },    
+    {
+      "CID": "BaronessSophiaLancaster170",
+      "Name": "Baroness Sophia Lancaster",
+      "Description": "Gallery Diplomat",
+      "price": "2.82",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Luscious",
+          "value": 22,
+          "description": "Elegant and captivating, embodies authority.",
+          "effect": "charisma",
+          "modifier": "increase_stat(influence, 12%)"
+        },
+        {
+          "category": "Location",
+          "name": "Gallery",
+          "value": 21,
+          "description": "Commands respect within formal gatherings.",
+          "effect": "buff",
+          "modifier": "increase_stat(charm_resonance, 10%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Blue High Heels",
+          "value": 20,
+          "description": "Adds elegance and height, enhancing presence.",
+          "effect": "defense",
+          "modifier": "increase_stat(balance, 8%)"
+        }
+      ]
+    },    
+    {
+      "CID": "LadyAmeliaWentworth",
+      "Name": "Lady Amelia Wentworth",
+      "Description": "Study Envoy",
+      "price": "2.91",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Luscious",
+          "value": 23,
+          "description": "Commanding presence that enhances charm.",
+          "effect": "charisma",
+          "modifier": "increase_stat(allure, 15%)"
+        },
+        {
+          "category": "Location",
+          "name": "Study",
+          "value": 18,
+          "description": "A setting of intellect and strategy.",
+          "effect": "buff",
+          "modifier": "increase_stat(knowledge, 10%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Green Skirt",
+          "value": 19,
+          "description": "Elegant yet understated, fitting for her role.",
+          "effect": "defense",
+          "modifier": "increase_stat(agility, 8%)"
+        }
+      ]
+    },    
+    {
+      "CID": "CountessVictoriaAshwood230",
+      "Name": "Countess Victoria Ashwood",
+      "Description": "Bedroom Muse",
+      "price": "2.97",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Luscious",
+          "value": 23,
+          "description": "Captivating allure with a disarming charm.",
+          "effect": "charisma",
+          "modifier": "increase_stat(allure, 15%)"
+        },
+        {
+          "category": "Location",
+          "name": "Bedroom",
+          "value": 21,
+          "description": "An intimate space radiating comfort.",
+          "effect": "buff",
+          "modifier": "increase_stat(charm_resilience, 12%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Nude",
+          "value": 20,
+          "description": "Unadorned elegance that heightens her presence.",
+          "effect": "charisma",
+          "modifier": "increase_stat(persuasion, 10%)"
+        }
+      ]
+    },    
+    {
+      "CID": "DameAbigailHargrove230",
+      "Name": "Dame Abigail Hargrove",
+      "Description": "Bathtub Enchantress",
+      "price": "2.47",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Ample",
+          "value": 21,
+          "description": "Full and graceful, projecting warmth and resilience.",
+          "effect": "defense",
+          "modifier": "increase_stat(defense, 12%)"
+        },
+        {
+          "category": "Location",
+          "name": "Bathtub",
+          "value": 19,
+          "description": "A calming sanctuary, enhancing tranquility.",
+          "effect": "buff",
+          "modifier": "increase_stat(recovery_rate, 10%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Nude",
+          "value": 22,
+          "description": "Natural elegance, exuding quiet strength.",
+          "effect": "charisma",
+          "modifier": "increase_stat(persuasion, 8%)"
+        }
+      ]
+    },    
+    {
+      "CID": "MarchionessFionaCarrington190",
+      "Name": "Marchioness Fiona Carrington",
+      "Description": "Library Scholar",
+      "price": "2.17",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Perky",
+          "value": 18,
+          "description": "Charming and lively, radiates an air of confidence.",
+          "effect": "charisma",
+          "modifier": "increase_stat(charm, 10%)"
+        },
+        {
+          "category": "Location",
+          "name": "Library",
+          "value": 20,
+          "description": "A place of wisdom, enhancing focus and insight.",
+          "effect": "buff",
+          "modifier": "increase_stat(mental_clarity, 8%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Beige Skirt",
+          "value": 19,
+          "description": "Elegant and understated, enhancing sophistication.",
+          "effect": "defense",
+          "modifier": "increase_stat(defense, 7%)"
+        }
+      ]
+    },    
+    {
+      "CID": "LadyGenevieveMontfort",
+      "Name": "Lady Genevieve Montfort",
+      "Description": "Courtyard Muse",
+      "price": "2.07",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Perky",
+          "value": 19,
+          "description": "Playfully charming, attracts attention effortlessly.",
+          "effect": "charisma",
+          "modifier": "increase_stat(charm, 10%)"
+        },
+        {
+          "category": "Location",
+          "name": "Courtyard",
+          "value": 21,
+          "description": "An open and inviting space, enhances vitality.",
+          "effect": "buff",
+          "modifier": "increase_stat(energy, 8%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Pink Sweater and Skirt",
+          "value": 18,
+          "description": "Soft, yet elegant; boosts warmth and approachability.",
+          "effect": "defense",
+          "modifier": "increase_stat(defense, 5%)"
+        }
+      ]
+    },
+    {
+      "CID": "BaronessCeciliaBeaumont215",
+      "Name": "Baroness Cecilia Beaumont",
+      "Description": "Bedroom Maven",
+      "price": "2.83",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Luscious",
+          "value": 22,
+          "description": "Full-bodied allure, known for its powerful charm.",
+          "effect": "defense",
+          "modifier": "increase_stat(health, 15%)"
+        },
+        {
+          "category": "Location",
+          "name": "Bedroom",
+          "value": 20,
+          "description": "An intimate setting, enhances strategic composure.",
+          "effect": "buff",
+          "modifier": "increase_stat(strategy, 7%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Jeans",
+          "value": 17,
+          "description": "Casual and adaptable, adds resilience.",
+          "effect": "defense",
+          "modifier": "increase_stat(durability, 5%)"
+        }
+      ]
+    },
+    {
+      "CID": "LadyRosalindClifford170",
+      "Name": "Lady Rosalind Clifford",
+      "Description": "Poolside Vision",
+      "price": "2.55",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Ample",
+          "value": 20,
+          "description": "Generously endowed, offers balanced protection.",
+          "effect": "defense",
+          "modifier": "increase_stat(resilience, 12%)"
+        },
+        {
+          "category": "Location",
+          "name": "Pool",
+          "value": 23,
+          "description": "Relaxing and serene, enhances tranquility.",
+          "effect": "buff",
+          "modifier": "increase_stat(calm, 10%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Black Maternity Skirt",
+          "value": 18,
+          "description": "Elegant and relaxed, boosts presence.",
+          "effect": "buff",
+          "modifier": "increase_stat(charisma, 7%)"
+        }
+      ]
+    },    
+    {
+      "CID": "CountessMatildaCavendish170",
+      "Name": "Countess Matilda Cavendish",
+      "Description": "Infirmary Guardian",
+      "price": "2.45",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Ample",
+          "value": 21,
+          "description": "Well-endowed and resilient, offers balanced protection.",
+          "effect": "defense",
+          "modifier": "increase_stat(resilience, 10%)"
+        },
+        {
+          "category": "Location",
+          "name": "Infirmary",
+          "value": 20,
+          "description": "A place of care and healing, boosts vitality.",
+          "effect": "buff",
+          "modifier": "increase_stat(health_regen, 8%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Beige Maternity Skirt",
+          "value": 18,
+          "description": "Comfortable and practical, enhancing composure.",
+          "effect": "defense",
+          "modifier": "increase_stat(durability, 5%)"
+        }
+      ]
+    },
+    {
+      "CID": "LadyPenelopeThornwood215",
+      "Name": "Lady Penelope Thornwood",
+      "Description": "Ruins Mystic",
+      "price": "2.07",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Perky",
+          "value": 19,
+          "description": "Petite and agile, draws attention with charm.",
+          "effect": "charisma",
+          "modifier": "increase_stat(charisma, 8%)"
+        },
+        {
+          "category": "Location",
+          "name": "Ruins",
+          "value": 22,
+          "description": "Ancient and mysterious, enhancing wisdom.",
+          "effect": "buff",
+          "modifier": "increase_stat(insight, 10%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Beige Skirt",
+          "value": 17,
+          "description": "Elegant and timeless, enhancing poise.",
+          "effect": "buff",
+          "modifier": "increase_stat(balance, 5%)"
+        }
+      ]
+    },
+    {
+      "CID": "MarchionessHelenaRavensdale215",
+      "Name": "Marchioness Helena Ravensdale",
+      "Description": "Forest Sentinel",
+      "price": "2.82",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Luscious",
+          "value": 23,
+          "description": "Bold and alluring, offers robust protection.",
+          "effect": "defense",
+          "modifier": "increase_stat(defense, 12%)"
+        },
+        {
+          "category": "Location",
+          "name": "Forest",
+          "value": 21,
+          "description": "Lush and shaded, enhances agility.",
+          "effect": "buff",
+          "modifier": "increase_stat(dexterity, 8%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Green Skirt",
+          "value": 19,
+          "description": "Blends with nature, adding stealth and resilience.",
+          "effect": "defense",
+          "modifier": "increase_stat(stealth, 6%)"
+        }
+      ]
+    },
+    {
+      "CID": "DameJosephineWycliffe170",
+      "Name": "Dame Josephine Wycliffe",
+      "Description": "Kitchen Custodian",
+      "price": "2.50",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Ample",
+          "value": 20,
+          "description": "Well-rounded and sturdy, enhancing defense.",
+          "effect": "defense",
+          "modifier": "increase_stat(health, 10%)"
+        },
+        {
+          "category": "Location",
+          "name": "Kitchen",
+          "value": 18,
+          "description": "A place of sustenance, boosts endurance.",
+          "effect": "buff",
+          "modifier": "increase_stat(stamina, 7%)"
+        },
+        {
+          "category": "Attire",
+          "name": "White Apron",
+          "value": 17,
+          "description": "Practical and neat, boosting resilience.",
+          "effect": "defense",
+          "modifier": "increase_stat(defense, 5%)"
+        }
+      ]
+    },    
+    {
+      "CID": "BaronessArabellaForsythe",
+      "Name": "Baroness Arabella Forsythe",
+      "Description": "Library Scholar",
+      "price": "2.05",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Perky",
+          "value": 18,
+          "description": "Petite and poised, enhancing agility.",
+          "effect": "dexterity",
+          "modifier": "increase_stat(agility, 8%)"
+        },
+        {
+          "category": "Location",
+          "name": "Library",
+          "value": 20,
+          "description": "A place of knowledge, boosting intellect.",
+          "effect": "intelligence",
+          "modifier": "increase_stat(intellect, 10%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Nude",
+          "value": 17,
+          "description": "Natural and refined, enhancing charisma.",
+          "effect": "charisma",
+          "modifier": "increase_stat(charisma, 5%)"
+        }
+      ]
+    },
+    {
+      "CID": "LadyConstanceBlackwood215",
+      "Name": "Lady Constance Blackwood",
+      "Description": "Lake Enchantress",
+      "price": "2.89",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Luscious",
+          "value": 23,
+          "description": "Full and captivating, offering high allure.",
+          "effect": "charm",
+          "modifier": "increase_stat(allure, 12%)"
+        },
+        {
+          "category": "Location",
+          "name": "Lake",
+          "value": 19,
+          "description": "Reflective and serene, enhancing tranquility.",
+          "effect": "calm",
+          "modifier": "increase_stat(calmness, 8%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Purple Swimwear",
+          "value": 18,
+          "description": "Bold and striking, adds to charm.",
+          "effect": "charisma",
+          "modifier": "increase_stat(charm, 6%)"
+        }
+      ]
+    },
+    {
+      "CID": "CountessBeatriceHarrowgate190",
+      "Name": "Countess Beatrice Harrowgate",
+      "Description": "Ballroom Virtuoso",
+      "price": "2.55",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Ample",
+          "value": 20,
+          "description": "Balanced and elegant, enhances poise.",
+          "effect": "defense",
+          "modifier": "increase_stat(balance, 10%)"
+        },
+        {
+          "category": "Location",
+          "name": "Ballroom",
+          "value": 22,
+          "description": "Grand and formal, increasing grace.",
+          "effect": "charisma",
+          "modifier": "increase_stat(grace, 10%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Blue Skirt",
+          "value": 19,
+          "description": "Classic and refined, boosting charisma.",
+          "effect": "charisma",
+          "modifier": "increase_stat(charm, 7%)"
+        }
+      ]
+    },
+    {
+      "CID": "MarchionessOliviaFairchild170",
+      "Name": "Marchioness Olivia Fairchild",
+      "Description": "Pool Socialite",
+      "price": "2.83",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Luscious",
+          "value": 23,
+          "description": "Bold and graceful, drawing attention.",
+          "effect": "charm",
+          "modifier": "increase_stat(allure, 10%)"
+        },
+        {
+          "category": "Location",
+          "name": "Pool",
+          "value": 21,
+          "description": "Relaxed and refreshing, enhancing charisma.",
+          "effect": "charisma",
+          "modifier": "increase_stat(relaxation, 8%)"
+        },
+        {
+          "category": "Attire",
+          "name": "Jean Skirt and Top",
+          "value": 18,
+          "description": "Casual and chic, boosting approachability.",
+          "effect": "charm",
+          "modifier": "increase_stat(approachability, 7%)"
+        }
+      ]
+    },
+    {
+      "CID": "LadyEleanorWhitmore215",
+      "Name": "Lady Eleanor Whitmore",
+      "Description": "Patio Diplomat",
+      "price": "2.07",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Perky",
+          "value": 17,
+          "description": "Sharp, attention-grabbing with a dignified allure."
+        },
+        {
+          "category": "Attire",
+          "name": "Black Lingerie",
+          "value": 18,
+          "description": "Elegant yet bold, tailored for refined settings."
+        },
+        {
+          "category": "Location",
+          "name": "Patio",
+          "value": 20,
+          "description": "A scenic, open space perfect for high-stakes negotiations."
+        }
+      ]
+    },
+    {
+      "CID": "DameVictoriaChesterfield215",
+      "Name": "Dame Victoria Chesterfield",
+      "Description": "Balcony Diplomat",
+      "price": "2.12",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Perky",
+          "value": 18,
+          "description": "Sharp and elegant, embodying youthful confidence."
+        },
+        {
+          "category": "Attire",
+          "name": "Beige Dress",
+          "value": 19,
+          "description": "Gracefully modest, blending with high-status ambiance."
+        },
+        {
+          "category": "Location",
+          "name": "Balcony",
+          "value": 20,
+          "description": "Elevated space for discreet observation and diplomacy."
+        }
+      ]
+    },
+    {
+      "CID": "BaronessLydiaHensley190",
+      "Name": "Baroness Lydia Hensley",
+      "Description": "Library Scholar",
+      "price": "2.82",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Luscious",
+          "value": 22,
+          "description": "Full-bodied and stately, an emblem of quiet power."
+        },
+        {
+          "category": "Attire",
+          "name": "Black Skirt",
+          "value": 18,
+          "description": "Dark elegance, blending allure with sophistication."
+        },
+        {
+          "category": "Location",
+          "name": "Library",
+          "value": 21,
+          "description": "A sanctuary of knowledge, suited for introspection and wit."
+        }
+      ]
+    },
+    {
+      "CID": "LadyIsadoraXingu",
+      "Name": "Lady Isadora Xingu",
+      "Description": "Palace Oracle",
+      "price": "2.51",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Ample",
+          "value": 21,
+          "description": "Grand and inviting, offering a sense of protection."
+        },
+        {
+          "category": "Attire",
+          "name": "Nude",
+          "value": 22,
+          "description": "In natural elegance, embodying raw, unadorned beauty."
+        },
+        {
+          "category": "Location",
+          "name": "Palace Ruins",
+          "value": 19,
+          "description": "Ancient grounds that evoke mystique and history."
+        }
+      ]
+    },
+   
+    {
+      "CID": "LadyEvelynRavenscroft",
+      "Name": "Lady Evelyn Ravenscroft",
+      "Description": "Library Enchantress",
+      "price": "2.82",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Luscious",
+          "value": 20,
+          "description": "Alluring and captivating, perfect for drawing attention."
+        },
+        {
+          "category": "Attire",
+          "name": "Green Lingerie",
+          "value": 19,
+          "description": "An exotic hue that enhances her mystique."
+        },
+        {
+          "category": "Location",
+          "name": "Library",
+          "value": 20,
+          "description": "A place of wisdom, housing secrets of ancient allure."
+        }
+      ]
+    },
+    {
+      "CID": "BaronessPoppyFairweather",
+      "Name": "Baroness Poppy Fairweather",
+      "Description": "Shower Sprite",
+      "price": "2.12",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Perky",
+          "value": 18,
+          "description": "Youthful and playful, with a vibrant charm."
+        },
+        {
+          "category": "Attire",
+          "name": "Nude",
+          "value": 17,
+          "description": "Radiates a natural beauty, untouched and fresh."
+        },
+        {
+          "category": "Location",
+          "name": "Shower",
+          "value": 18,
+          "description": "A playful, intimate setting that reveals true charm."
+        }
+      ]
+    },
+    {
+      "CID": "DameFlorenceHawthorne",
+      "Name": "Dame Florence Hawthorne",
+      "Description": "Stables Guardian",
+      "price": "2.47",
+      "traits": [
+        {
+          "category": "Breasts",
+          "name": "Ample",
+          "value": 20,
+          "description": "Strong and steadfast, suited to her rugged charm."
+        },
+        {
+          "category": "Attire",
+          "name": "Black Shorts",
+          "value": 17,
+          "description": "Practical and bold, matching her grounded presence."
+        },
+        {
+          "category": "Location",
+          "name": "Stables",
+          "value": 19,
+          "description": "A place of rustic charm, suited to her steady spirit."
+        }
+      ]
+    }
+  ]
+}    
