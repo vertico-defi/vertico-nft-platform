@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import WalletButton from "@/components/WalletButton";
 
@@ -40,6 +41,19 @@ type MyNftsResponse = {
     courtiers: number;
     royals: number;
   };
+};
+
+type NativeMarketplaceListing = {
+  id: string;
+  sellerWallet: string;
+  mintAddress: string | null;
+  priceSol: number | null;
+  saleStatus: string;
+};
+
+type MarketplaceResponse = {
+  success: boolean;
+  nativeListings?: NativeMarketplaceListing[];
 };
 
 type CharacterHolding = {
@@ -91,25 +105,85 @@ function getNextRankTarget(totalOwned: number) {
   return "Top collector rank reached.";
 }
 
-export default function MyNftsClient() {
-  const { publicKey, connected } = useWallet();
+function subscribeToClientReady() {
+  return () => {};
+}
 
-  const [mounted, setMounted] = useState(false);
+function getClientReadySnapshot() {
+  return true;
+}
+
+function getServerReadySnapshot() {
+  return false;
+}
+
+function uint8ArrayToBase64(value: Uint8Array) {
+  let binary = "";
+
+  for (let i = 0; i < value.length; i += 1) {
+    binary += String.fromCharCode(value[i]);
+  }
+
+  return btoa(binary);
+}
+
+function stringToBase64(value: string) {
+  const bytes = new TextEncoder().encode(value);
+  return uint8ArrayToBase64(bytes);
+}
+
+async function createListingAuthHeaders({
+  walletAddress,
+  lines,
+  signMessage,
+}: {
+  walletAddress: string;
+  lines: string[];
+  signMessage: (message: Uint8Array) => Promise<Uint8Array>;
+}) {
+  const message = [
+    "Vertico Native Marketplace Listing",
+    `Wallet: ${walletAddress}`,
+    ...lines,
+    `Timestamp: ${Date.now()}`,
+    `Nonce: ${crypto.randomUUID()}`,
+    "",
+    "Sign this message to manage a wallet-held Vertico marketplace listing.",
+  ].join("\n");
+  const signature = await signMessage(new TextEncoder().encode(message));
+
+  return {
+    "x-wallet-message-base64": stringToBase64(message),
+    "x-wallet-signature": uint8ArrayToBase64(signature),
+  };
+}
+
+export default function MyNftsClient() {
+  const { publicKey, connected, signMessage } = useWallet();
+
+  const mounted = useSyncExternalStore(
+    subscribeToClientReady,
+    getClientReadySnapshot,
+    getServerReadySnapshot
+  );
   const [history, setHistory] = useState<MintHistoryEntry[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [listingMessage, setListingMessage] = useState<string | null>(null);
+  const [listingPrices, setListingPrices] = useState<Record<string, string>>({});
+  const [listingByMint, setListingByMint] = useState<
+    Record<string, NativeMarketplaceListing>
+  >({});
+  const [busyListingMint, setBusyListingMint] = useState<string | null>(null);
   const [selectedCollection, setSelectedCollection] = useState<
     "all" | "pages" | "courtiers" | "royals"
   >("all");
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
     async function loadMyNfts() {
       if (!publicKey) {
         setHistory([]);
+        setListingByMint({});
         return;
       }
 
@@ -119,17 +193,37 @@ export default function MyNftsClient() {
       try {
         const wallet = publicKey.toBase58();
 
-        const response = await fetch(`/api/my-nfts?wallet=${wallet}`, {
-          cache: "no-store",
-        });
+        const [response, marketplaceResponse] = await Promise.all([
+          fetch(`/api/my-nfts?wallet=${wallet}`, {
+            cache: "no-store",
+          }),
+          fetch("/api/marketplace/collections/approved", {
+            cache: "no-store",
+          }),
+        ]);
 
         const data: MyNftsResponse = await response.json();
+        const marketplaceData: MarketplaceResponse =
+          await marketplaceResponse.json();
 
         if (!response.ok || !data.success) {
           throw new Error("Could not load wallet NFTs.");
         }
 
+        if (!marketplaceResponse.ok || !marketplaceData.success) {
+          throw new Error("Could not load marketplace listing state.");
+        }
+
+        const nextListingByMint: Record<string, NativeMarketplaceListing> = {};
+
+        for (const listing of marketplaceData.nativeListings || []) {
+          if (listing.mintAddress) {
+            nextListingByMint[listing.mintAddress] = listing;
+          }
+        }
+
         setHistory(data.nfts || []);
+        setListingByMint(nextListingByMint);
       } catch (error) {
         setLoadError(
           error instanceof Error ? error.message : "Could not load wallet NFTs."
@@ -145,6 +239,125 @@ export default function MyNftsClient() {
   }, [mounted, publicKey]);
 
   const walletAddress = publicKey?.toBase58();
+
+  async function listingAuthHeaders(lines: string[]) {
+    if (!walletAddress) throw new Error("Connect your wallet first.");
+    if (!signMessage) throw new Error("This wallet does not support signing.");
+
+    return createListingAuthHeaders({ walletAddress, lines, signMessage });
+  }
+
+  async function createListing(item: MintHistoryEntry) {
+    if (!walletAddress) {
+      setListingMessage("Connect your wallet before listing.");
+      return;
+    }
+
+    const priceSol = Number(listingPrices[item.mintAddress]);
+
+    if (!Number.isFinite(priceSol) || priceSol <= 0) {
+      setListingMessage("Enter a positive SOL price before listing.");
+      return;
+    }
+
+    setBusyListingMint(item.mintAddress);
+    setListingMessage(null);
+
+    try {
+      const authHeaders = await listingAuthHeaders([
+        "Action: create_native_listing",
+        `Mint: ${item.mintAddress}`,
+        `Price SOL: ${priceSol}`,
+      ]);
+      const response = await fetch("/api/marketplace/listings/create-native", {
+        method: "POST",
+        headers: { ...authHeaders, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          walletAddress,
+          mintAddress: item.mintAddress,
+          priceSol,
+        }),
+      });
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Could not create marketplace listing.");
+      }
+
+      setListingByMint((current) => ({
+        ...current,
+        [item.mintAddress]: {
+          id: data.listing.id,
+          sellerWallet: data.listing.seller_wallet,
+          mintAddress: data.listing.mint_address,
+          priceSol:
+            data.listing.price_sol === null
+              ? null
+              : Number(data.listing.price_sol),
+          saleStatus: data.listing.sale_status,
+        },
+      }));
+      setListingPrices((current) => ({ ...current, [item.mintAddress]: "" }));
+      setListingMessage("Listed on marketplace.");
+    } catch (error) {
+      setListingMessage(
+        error instanceof Error
+          ? error.message
+          : "Could not create marketplace listing."
+      );
+    } finally {
+      setBusyListingMint(null);
+    }
+  }
+
+  async function cancelListing(listing: NativeMarketplaceListing) {
+    if (!walletAddress) {
+      setListingMessage("Connect your wallet before cancelling.");
+      return;
+    }
+
+    setBusyListingMint(listing.mintAddress);
+    setListingMessage(null);
+
+    try {
+      const authHeaders = await listingAuthHeaders([
+        "Action: cancel_native_listing",
+        `Listing: ${listing.id}`,
+      ]);
+      const response = await fetch("/api/marketplace/listings/cancel-native", {
+        method: "POST",
+        headers: { ...authHeaders, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          walletAddress,
+          listingId: listing.id,
+        }),
+      });
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Could not cancel marketplace listing.");
+      }
+
+      setListingByMint((current) => {
+        const next = { ...current };
+
+        if (listing.mintAddress) {
+          delete next[listing.mintAddress];
+        }
+
+        return next;
+      });
+      setListingMessage("Marketplace listing cancelled.");
+    } catch (error) {
+      setListingMessage(
+        error instanceof Error
+          ? error.message
+          : "Could not cancel marketplace listing."
+      );
+    } finally {
+      setBusyListingMint(null);
+    }
+  }
 
   const myNfts = useMemo(() => {
     return history.filter(
@@ -215,14 +428,17 @@ export default function MyNftsClient() {
     <main className="min-h-screen bg-zinc-950 px-6 py-10 text-white">
       <section className="mx-auto max-w-7xl">
         <nav className="mb-10 flex flex-wrap items-center justify-between gap-4">
-          <a href="/" className="text-sm font-semibold text-amber-400">
+          <Link href="/" className="text-sm font-semibold text-amber-400">
             ← Back home
-          </a>
+          </Link>
 
           <div className="flex items-center gap-3">
-            <a href="/mint" className="text-sm font-semibold text-emerald-400">
+            <Link
+              href="/mint"
+              className="text-sm font-semibold text-emerald-400"
+            >
               Mint NFT →
-            </a>
+            </Link>
             <WalletButton />
           </div>
         </nav>
@@ -424,6 +640,12 @@ export default function MyNftsClient() {
           </div>
         )}
 
+        {listingMessage && (
+          <div className="mt-8 rounded-2xl border border-amber-400/30 bg-amber-400/10 p-5 text-sm text-amber-100">
+            {listingMessage}
+          </div>
+        )}
+
         {isLoading && (
           <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-8 text-zinc-400">
             Scanning wallet on Solana devnet...
@@ -452,22 +674,67 @@ export default function MyNftsClient() {
               NFTs from the known Pages, Courtiers, or Royals collections.
             </p>
 
-            <a
+            <Link
               href="/mint"
               className="mt-6 inline-block rounded-xl bg-amber-500 px-6 py-3 font-bold text-black transition hover:bg-amber-400"
             >
               Mint your first NFT
-            </a>
+            </Link>
           </div>
         )}
 
         {connected && myNfts.length > 0 && (
           <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {myNfts.map((item) => (
-              <article
+              <NftCard
                 key={item.id}
-                className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-xl"
-              >
+                item={item}
+                activeListing={listingByMint[item.mintAddress]}
+                busyListingMint={busyListingMint}
+                listingPrice={listingPrices[item.mintAddress] || ""}
+                walletAddress={walletAddress}
+                onListingPriceChange={(value) =>
+                  setListingPrices((current) => ({
+                    ...current,
+                    [item.mintAddress]: value,
+                  }))
+                }
+                onCreateListing={() => createListing(item)}
+                onCancelListing={cancelListing}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+    </main>
+  );
+}
+
+function NftCard({
+  item,
+  activeListing,
+  busyListingMint,
+  listingPrice,
+  walletAddress,
+  onListingPriceChange,
+  onCreateListing,
+  onCancelListing,
+}: {
+  item: MintHistoryEntry;
+  activeListing?: NativeMarketplaceListing;
+  busyListingMint: string | null;
+  listingPrice: string;
+  walletAddress?: string;
+  onListingPriceChange: (value: string) => void;
+  onCreateListing: () => void;
+  onCancelListing: (listing: NativeMarketplaceListing) => void;
+}) {
+  const isBusy = busyListingMint === item.mintAddress;
+  const isOwnListing =
+    activeListing?.sellerWallet && activeListing.sellerWallet === walletAddress;
+
+  return (
+    <article className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-xl">
                 <div className="aspect-[3/4] overflow-hidden bg-zinc-900">
                   {item.imageUri ? (
                     <img
@@ -585,11 +852,59 @@ export default function MyNftsClient() {
                     Owner: {shortAddress(item.recipient)}
                   </p>
                 </div>
-              </article>
-            ))}
+      <div className="border-t border-white/10 bg-black/25 p-5">
+        {activeListing ? (
+          <div>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <span className="rounded-full border border-sky-400/40 bg-sky-400/10 px-3 py-1 text-xs font-semibold text-sky-200">
+                Already listed
+              </span>
+              <span className="text-sm font-semibold text-zinc-200">
+                {activeListing.priceSol} SOL
+              </span>
+            </div>
+            {isOwnListing && (
+              <button
+                onClick={() => onCancelListing(activeListing)}
+                disabled={isBusy}
+                className="mt-4 w-full rounded-xl border border-red-400/40 px-4 py-3 text-sm font-bold text-red-200 hover:bg-red-400/10 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {isBusy ? "Cancelling..." : "Cancel Listing"}
+              </button>
+            )}
+          </div>
+        ) : (
+          <div>
+            <p className="text-sm leading-6 text-zinc-300">
+              This creates a public marketplace listing. Your NFT remains in
+              your wallet until escrow sales are added.
+            </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_auto]">
+              <label>
+                <span className="sr-only">Price in SOL</span>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.001"
+                  value={listingPrice}
+                  onChange={(event) =>
+                    onListingPriceChange(event.target.value)
+                  }
+                  placeholder="Price in SOL"
+                  className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm outline-none focus:border-amber-400"
+                />
+              </label>
+              <button
+                onClick={onCreateListing}
+                disabled={isBusy}
+                className="rounded-xl bg-amber-500 px-4 py-3 text-sm font-bold text-black hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {isBusy ? "Listing..." : "List on Marketplace"}
+              </button>
+            </div>
           </div>
         )}
-      </section>
-    </main>
+      </div>
+    </article>
   );
 }

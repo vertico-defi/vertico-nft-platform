@@ -35,6 +35,13 @@ export default function Home() {
 
           <div className="flex flex-wrap items-center gap-3">
             <a
+              href="/marketplace"
+              className="rounded-xl border border-sky-400/40 px-4 py-2 text-sm font-semibold text-sky-300 transition hover:bg-sky-400/10"
+            >
+              Marketplace
+            </a>
+
+            <a
               href="/mint"
               className="rounded-xl border border-amber-400/40 px-4 py-2 text-sm font-semibold text-amber-300 transition hover:bg-amber-400/10"
             >
@@ -89,6 +96,13 @@ export default function Home() {
               >
                 View My NFTs
               </a>
+
+              <a
+                href="/marketplace"
+                className="rounded-xl border border-sky-400/40 px-6 py-3 text-center font-semibold text-sky-300 transition hover:bg-sky-400/10"
+              >
+                Marketplace
+              </a>
             </div>
           </div>
 
@@ -126,6 +140,50 @@ export default function Home() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
+            <a
+              href="/marketplace"
+              className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-sky-400/50 hover:bg-white/[0.06]"
+            >
+              <h3 className="text-2xl font-bold">Marketplace</h3>
+              <p className="mt-3 leading-7 text-zinc-400">
+                Approved adult digital collectible collections reviewed before
+                public display.
+              </p>
+              <p className="mt-6 text-sm font-semibold text-sky-400">
+                Browse Marketplace →
+              </p>
+            </a>
+
+            <a
+              href="/marketplace/apply"
+              className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-emerald-400/50 hover:bg-white/[0.06]"
+            >
+              <h3 className="text-2xl font-bold">Apply as Creator</h3>
+              <p className="mt-3 leading-7 text-zinc-400">
+                Submit a creator profile for admin review before listing any
+                adult collection.
+              </p>
+              <p className="mt-6 text-sm font-semibold text-emerald-400">
+                Start Application →
+              </p>
+            </a>
+
+            <a
+              href="/marketplace/submit"
+              className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-amber-400/50 hover:bg-white/[0.06]"
+            >
+              <h3 className="text-2xl font-bold">Submit Collection</h3>
+              <p className="mt-3 leading-7 text-zinc-400">
+                Approved creators can submit collections for moderation before
+                public marketplace approval.
+              </p>
+              <p className="mt-6 text-sm font-semibold text-amber-400">
+                Submit for Review →
+              </p>
+            </a>
+          </div>
+
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
             {collections.map((collection) => (
               <a
                 key={collection.name}
