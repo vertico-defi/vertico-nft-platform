@@ -193,37 +193,50 @@ export default function MyNftsClient() {
       try {
         const wallet = publicKey.toBase58();
 
-        const [response, marketplaceResponse] = await Promise.all([
-          fetch(`/api/my-nfts?wallet=${wallet}`, {
-            cache: "no-store",
-          }),
-          fetch("/api/marketplace/collections/approved", {
-            cache: "no-store",
-          }),
-        ]);
+        const response = await fetch(`/api/my-nfts?wallet=${wallet}`, {
+          cache: "no-store",
+        });
 
         const data: MyNftsResponse = await response.json();
-        const marketplaceData: MarketplaceResponse =
-          await marketplaceResponse.json();
 
         if (!response.ok || !data.success) {
           throw new Error("Could not load wallet NFTs.");
         }
 
-        if (!marketplaceResponse.ok || !marketplaceData.success) {
-          throw new Error("Could not load marketplace listing state.");
-        }
-
-        const nextListingByMint: Record<string, NativeMarketplaceListing> = {};
-
-        for (const listing of marketplaceData.nativeListings || []) {
-          if (listing.mintAddress) {
-            nextListingByMint[listing.mintAddress] = listing;
-          }
-        }
-
         setHistory(data.nfts || []);
-        setListingByMint(nextListingByMint);
+
+        try {
+          const marketplaceResponse = await fetch(
+            "/api/marketplace/collections/approved",
+            {
+              cache: "no-store",
+            }
+          );
+          const marketplaceData: MarketplaceResponse =
+            await marketplaceResponse.json();
+
+          if (!marketplaceResponse.ok || !marketplaceData.success) {
+            throw new Error("Could not load marketplace listing state.");
+          }
+
+          const nextListingByMint: Record<string, NativeMarketplaceListing> = {};
+
+          for (const listing of marketplaceData.nativeListings || []) {
+            if (listing.mintAddress) {
+              nextListingByMint[listing.mintAddress] = listing;
+            }
+          }
+
+          setListingByMint(nextListingByMint);
+          setListingMessage(null);
+        } catch (listingStateError) {
+          setListingByMint({});
+          setListingMessage(
+            listingStateError instanceof Error
+              ? listingStateError.message
+              : "Could not load marketplace listing state."
+          );
+        }
       } catch (error) {
         setLoadError(
           error instanceof Error ? error.message : "Could not load wallet NFTs."
