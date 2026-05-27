@@ -9,6 +9,7 @@ import WalletButton from "@/components/WalletButton";
 export default function MarketplaceApplyClient() {
   const { publicKey, connected } = useWallet();
   const [displayName, setDisplayName] = useState("");
+  const [bio, setBio] = useState("");
   const [email, setEmail] = useState("");
   const [country, setCountry] = useState("");
   const [websiteUrl, setWebsiteUrl] = useState("");
@@ -16,6 +17,7 @@ export default function MarketplaceApplyClient() {
   const [ageAttested, setAgeAttested] = useState(false);
   const [rightsAttested, setRightsAttested] = useState(false);
   const [policyAcknowledged, setPolicyAcknowledged] = useState(false);
+  const [reviewAcknowledged, setReviewAcknowledged] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
@@ -29,8 +31,10 @@ export default function MarketplaceApplyClient() {
       return;
     }
 
-    if (!policyAcknowledged) {
-      setMessage("You must acknowledge the prohibited content policy.");
+    if (!policyAcknowledged || !reviewAcknowledged) {
+      setMessage(
+        "Confirm the prohibited content policy and review process before applying."
+      );
       return;
     }
 
@@ -45,6 +49,7 @@ export default function MarketplaceApplyClient() {
           walletAddress,
           email,
           displayName,
+          bio,
           country,
           websiteUrl,
           xUrl,
@@ -93,6 +98,13 @@ export default function MarketplaceApplyClient() {
             collections. No creator can publish publicly until Vertico admin
             approval is complete.
           </p>
+          <div className="mt-6 rounded-2xl border border-amber-400/20 bg-amber-400/10 p-5 text-sm leading-6 text-amber-100">
+            Creator applications are reviewed before collections can appear
+            publicly. Approval does not guarantee every collection will be
+            accepted. You must own or control the rights to submitted content,
+            and you must not submit illegal, non-consensual, stolen, or
+            age-ambiguous content.
+          </div>
         </header>
 
         <MarketplacePolicy />
@@ -157,6 +169,17 @@ export default function MarketplaceApplyClient() {
               />
             </label>
             <label className="block md:col-span-2">
+              <span className="text-sm font-semibold text-zinc-300">
+                Public bio
+              </span>
+              <textarea
+                value={bio}
+                onChange={(event) => setBio(event.target.value)}
+                rows={3}
+                className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 outline-none focus:border-amber-400"
+              />
+            </label>
+            <label className="block md:col-span-2">
               <span className="text-sm font-semibold text-zinc-300">X URL</span>
               <input
                 value={xUrl}
@@ -174,8 +197,8 @@ export default function MarketplaceApplyClient() {
                 onChange={(event) => setAgeAttested(event.target.checked)}
                 className="mt-1"
               />
-              I confirm I am 18+ and all depicted persons in submitted content
-              are 18+.
+              I am 18 or older, and all depicted persons in submitted content
+              must be 18 or older.
             </label>
             <label className="flex gap-3 text-sm leading-6 text-zinc-200">
               <input
@@ -194,10 +217,21 @@ export default function MarketplaceApplyClient() {
                 onChange={(event) => setPolicyAcknowledged(event.target.checked)}
                 className="mt-1"
               />
-              I acknowledge the prohibited content policy and understand that
-              no CSAM, simulated CSAM, non-consensual, stolen, deepfake,
-              coercive, exploitative, trafficking, bestiality, or illegal
-              content is permitted.
+              I will not submit prohibited content, including illegal,
+              non-consensual, stolen, age-ambiguous, exploitative, or
+              rights-infringing material.
+            </label>
+            <label className="flex gap-3 text-sm leading-6 text-zinc-200">
+              <input
+                type="checkbox"
+                checked={reviewAcknowledged}
+                onChange={(event) =>
+                  setReviewAcknowledged(event.target.checked)
+                }
+                className="mt-1"
+              />
+              I understand creator applications and collection submissions are
+              reviewed before public listing.
             </label>
           </div>
 

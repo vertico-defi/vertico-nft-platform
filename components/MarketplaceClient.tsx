@@ -6,20 +6,10 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import MarketplacePolicy from "@/components/MarketplacePolicy";
 import WalletButton from "@/components/WalletButton";
 
-type MarketplaceListing = {
-  id: string;
-  name: string;
-  description: string;
-  imageUrl: string | null;
-  priceSol: number | null;
-  status: string;
-};
-
 type NativeMarketplaceListing = {
   id: string;
   collectionType: "pages" | "courtiers" | "royals" | null;
   sellerWallet: string;
-  ownerWallet: string | null;
   mintAddress: string | null;
   name: string;
   description: string;
@@ -27,6 +17,7 @@ type NativeMarketplaceListing = {
   priceSol: number | null;
   saleStatus: string;
   custodyStatus: string;
+  createdAt: string;
 };
 
 type MarketplaceCollection = {
@@ -41,11 +32,58 @@ type MarketplaceCollection = {
     display_name?: string;
     wallet_address?: string;
   } | null;
-  listings: MarketplaceListing[];
+  createdAt: string;
 };
 
+type MarketplaceItem =
+  | {
+      kind: "native";
+      id: string;
+      name: string;
+      description: string;
+      imageUrl: string | null;
+      priceSol: number | null;
+      collectionType: "pages" | "courtiers" | "royals" | null;
+      sellerWallet: string;
+      href: string;
+      createdAt?: string;
+    }
+  | {
+      kind: "collection";
+      id: string;
+      name: string;
+      description: string;
+      imageUrl: string | null;
+      priceSol: null;
+      chain: string;
+      creatorLabel: string;
+      creatorWallet: string | null;
+      href: string;
+      createdAt?: string;
+    };
+
+const filterOptions = [
+  ["all", "All"],
+  ["native", "Native Vertico NFTs"],
+  ["external", "External Collections"],
+  ["pages", "Pages"],
+  ["courtiers", "Courtiers"],
+  ["royals", "Royals"],
+  ["approved", "Approved Collections"],
+] as const;
+
+const reportReasons = [
+  "Illegal content",
+  "Non-consensual content",
+  "Rights issue",
+  "Age/performer concern",
+  "Stolen content",
+  "Misleading listing",
+  "Other",
+];
+
 function shortAddress(value?: string | null) {
-  if (!value) return "Unknown creator";
+  if (!value) return "Unknown";
   return `${value.slice(0, 6)}...${value.slice(-6)}`;
 }
 
@@ -56,15 +94,8 @@ function collectionLabel(value?: NativeMarketplaceListing["collectionType"]) {
   return "Vertico";
 }
 
-function custodyLabel(value: string) {
-  if (value === "wallet_held") return "Wallet-held";
-  if (value === "escrowed") return "Escrowed";
-  return value;
-}
-
 function subscribeToAgeVerification(onStoreChange: () => void) {
   window.addEventListener("storage", onStoreChange);
-
   return () => window.removeEventListener("storage", onStoreChange);
 }
 
@@ -85,6 +116,10 @@ export default function MarketplaceClient() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [reportMessage, setReportMessage] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const [activeFilter, setActiveFilter] =
+    useState<(typeof filterOptions)[number][0]>("all");
+  const [sort, setSort] = useState("newest");
   const ageVerified = useSyncExternalStore(
     subscribeToAgeVerification,
     getAgeVerificationSnapshot,
@@ -124,20 +159,95 @@ export default function MarketplaceClient() {
     loadCollections();
   }, []);
 
-  const totalListings = useMemo(
-    () =>
-      collections.reduce(
-        (count, collection) => count + collection.listings.length,
-        nativeListings.length
-      ),
-    [collections, nativeListings.length]
-  );
+  const items = useMemo<MarketplaceItem[]>(() => {
+    const nativeItems: MarketplaceItem[] = nativeListings.map((listing) => ({
+      kind: "native",
+      id: listing.id,
+      name: listing.name,
+      description: listing.description,
+      imageUrl: listing.imageUrl,
+      priceSol: listing.priceSol,
+      collectionType: listing.collectionType,
+      sellerWallet: listing.sellerWallet,
+      href: `/marketplace/listing/${listing.id}`,
+      createdAt: listing.createdAt,
+    }));
+
+    const collectionItems: MarketplaceItem[] = collections.map((collection) => ({
+      kind: "collection",
+      id: collection.id,
+      name: collection.collectionName,
+      description: collection.description,
+      imageUrl: collection.previewImageUrls[0] || null,
+      priceSol: null,
+      chain: collection.chain,
+      creatorLabel:
+        collection.creator?.display_name ||
+        shortAddress(collection.creator?.wallet_address),
+      creatorWallet: collection.creator?.wallet_address || null,
+      href: `/marketplace/collection/${collection.id}`,
+      createdAt: collection.createdAt,
+    }));
+
+    return [...nativeItems, ...collectionItems];
+  }, [collections, nativeListings]);
+
+  const filteredItems = useMemo(() => {
+    const needle = search.trim().toLowerCase();
+
+    return items
+      .filter((item) => {
+        if (activeFilter === "native") return item.kind === "native";
+        if (activeFilter === "external") return item.kind === "collection";
+        if (activeFilter === "approved") return item.kind === "collection";
+        if (
+          activeFilter === "pages" ||
+          activeFilter === "courtiers" ||
+          activeFilter === "royals"
+        ) {
+          return item.kind === "native" && item.collectionType === activeFilter;
+        }
+        return true;
+      })
+      .filter((item) => {
+        if (!needle) return true;
+
+        const haystack =
+          item.kind === "native"
+            ? [
+                item.name,
+                item.description,
+                collectionLabel(item.collectionType),
+                item.sellerWallet,
+                shortAddress(item.sellerWallet),
+              ]
+            : [item.name, item.description, item.chain, item.creatorLabel];
+
+        return haystack.join(" ").toLowerCase().includes(needle);
+      })
+      .sort((a, b) => {
+        if (sort === "name") return a.name.localeCompare(b.name);
+        if (sort === "price_asc") {
+          return (a.priceSol ?? Number.MAX_SAFE_INTEGER) - (b.priceSol ?? Number.MAX_SAFE_INTEGER);
+        }
+        if (sort === "price_desc") {
+          return (b.priceSol ?? -1) - (a.priceSol ?? -1);
+        }
+        return (
+          new Date(b.createdAt || 0).getTime() -
+          new Date(a.createdAt || 0).getTime()
+        );
+      });
+  }, [activeFilter, items, search, sort]);
 
   async function reportContent(targetType: "collection" | "listing", targetId: string) {
-    const reason = window.prompt("Report reason");
+    const reason = window.prompt(
+      `Report reason:\n${reportReasons.join("\n")}`,
+      "Misleading listing"
+    );
     if (!reason?.trim()) return;
 
-    const details = window.prompt("Optional details") || "";
+    const details = window.prompt("Details") || "";
 
     setReportMessage(null);
 
@@ -159,7 +269,7 @@ export default function MarketplaceClient() {
         throw new Error(data.error || "Could not create report.");
       }
 
-      setReportMessage("Report received. Admin moderation will review it.");
+      setReportMessage("Thank you. This report has been sent for review.");
     } catch (reportError) {
       setReportMessage(
         reportError instanceof Error
@@ -167,6 +277,12 @@ export default function MarketplaceClient() {
           : "Could not create report."
       );
     }
+  }
+
+  function clearFilters() {
+    setSearch("");
+    setActiveFilter("all");
+    setSort("newest");
   }
 
   return (
@@ -177,18 +293,15 @@ export default function MarketplaceClient() {
             Back home
           </Link>
           <div className="flex flex-wrap items-center gap-3">
-            <a
-              href="/marketplace/apply"
-              className="rounded-xl border border-emerald-400/40 px-4 py-2 text-sm font-semibold text-emerald-300 hover:bg-emerald-400/10"
-            >
+            <Link href="/mint" className="rounded-xl border border-amber-400/40 px-4 py-2 text-sm font-semibold text-amber-300 hover:bg-amber-400/10">
+              Mint NFT
+            </Link>
+            <Link href="/mynfts" className="rounded-xl border border-sky-400/40 px-4 py-2 text-sm font-semibold text-sky-300 hover:bg-sky-400/10">
+              My NFTs
+            </Link>
+            <Link href="/marketplace/apply" className="rounded-xl border border-emerald-400/40 px-4 py-2 text-sm font-semibold text-emerald-300 hover:bg-emerald-400/10">
               Apply as Creator
-            </a>
-            <a
-              href="/marketplace/submit"
-              className="rounded-xl border border-sky-400/40 px-4 py-2 text-sm font-semibold text-sky-300 hover:bg-sky-400/10"
-            >
-              Submit Collection
-            </a>
+            </Link>
             <WalletButton />
           </div>
         </nav>
@@ -199,20 +312,61 @@ export default function MarketplaceClient() {
           </p>
           <h1 className="mt-3 text-5xl font-bold">Vertico Marketplace</h1>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-zinc-300">
-            Approved adult digital collectible collections. All public
-            collections are reviewed before appearing here.
+            Browse wallet-held native Vertico NFT listings and approved external
+            collections. Purchase execution is not live yet.
           </p>
           <div className="mt-6 flex flex-wrap gap-3 text-sm text-zinc-300">
-            <span className="rounded-full border border-amber-400/30 px-3 py-1">
+            <span className="rounded-full border border-emerald-400/30 px-3 py-1">
               {collections.length} approved collections
             </span>
-            <span className="rounded-full border border-emerald-400/30 px-3 py-1">
-              {totalListings} approved listings
+            <span className="rounded-full border border-sky-400/30 px-3 py-1">
+              {nativeListings.length} native listings
             </span>
           </div>
         </header>
 
         <MarketplacePolicy />
+
+        <div className="mt-6 grid gap-3 lg:grid-cols-[1fr_auto_auto]">
+          <input
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            placeholder="Search name, description, collection, or wallet"
+            className="rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm outline-none focus:border-amber-400"
+          />
+          <select
+            value={sort}
+            onChange={(event) => setSort(event.target.value)}
+            className="rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm outline-none focus:border-amber-400"
+          >
+            <option value="newest">Newest</option>
+            <option value="price_asc">Price: low to high</option>
+            <option value="price_desc">Price: high to low</option>
+            <option value="name">Name A-Z</option>
+          </select>
+          <button
+            onClick={clearFilters}
+            className="rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-zinc-200 hover:bg-white/10"
+          >
+            Clear filters
+          </button>
+        </div>
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          {filterOptions.map(([id, label]) => (
+            <button
+              key={id}
+              onClick={() => setActiveFilter(id)}
+              className={`rounded-xl border px-3 py-2 text-sm font-semibold ${
+                activeFilter === id
+                  ? "border-amber-400 bg-amber-400 text-black"
+                  : "border-white/10 bg-white/[0.03] text-zinc-300 hover:border-amber-400/50"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
 
         {reportMessage && (
           <div className="mt-6 rounded-2xl border border-amber-400/30 bg-amber-400/10 p-4 text-sm text-amber-100">
@@ -222,124 +376,60 @@ export default function MarketplaceClient() {
 
         {error && (
           <div className="mt-8 rounded-2xl border border-red-400/30 bg-red-400/10 p-5 text-red-100">
-            {error}
+            <p>{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="mt-4 rounded-xl border border-red-200/40 px-4 py-2 text-sm font-semibold hover:bg-red-400/10"
+            >
+              Retry
+            </button>
           </div>
         )}
 
         {isLoading ? (
           <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-zinc-300">
-            Loading approved collections...
+            Loading marketplace...
           </div>
-        ) : collections.length === 0 && nativeListings.length === 0 ? (
-          <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-zinc-300">
-            No approved marketplace collections are public yet.
+        ) : items.length === 0 ? (
+          <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-8 text-center">
+            <h2 className="text-2xl font-bold">No marketplace listings yet.</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-zinc-400">
+              Mint a Vertico NFT, list one from My NFTs, or apply as a creator
+              to submit an approved collection.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Link href="/mint" className="rounded-xl bg-amber-500 px-5 py-3 font-bold text-black hover:bg-amber-400">
+                Mint NFT
+              </Link>
+              <Link href="/mynfts" className="rounded-xl border border-sky-400/40 px-5 py-3 font-bold text-sky-200 hover:bg-sky-400/10">
+                My NFTs
+              </Link>
+              <Link href="/marketplace/apply" className="rounded-xl border border-emerald-400/40 px-5 py-3 font-bold text-emerald-200 hover:bg-emerald-400/10">
+                Apply as Creator
+              </Link>
+            </div>
+          </div>
+        ) : filteredItems.length === 0 ? (
+          <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-8 text-center">
+            <h2 className="text-2xl font-bold">No results match this filter.</h2>
+            <button
+              onClick={clearFilters}
+              className="mt-5 rounded-xl border border-white/15 px-5 py-3 font-bold text-zinc-200 hover:bg-white/10"
+            >
+              Clear filters
+            </button>
           </div>
         ) : (
-          <>
-            {nativeListings.length > 0 && (
-              <section className="mt-8">
-                <div className="flex flex-wrap items-end justify-between gap-4">
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.25em] text-sky-300">
-                      Vertico verified
-                    </p>
-                    <h2 className="mt-2 text-3xl font-bold">
-                      Native Vertico NFTs
-                    </h2>
-                  </div>
-                  <p className="max-w-xl text-sm leading-6 text-zinc-400">
-                    These listings are wallet-held. Purchase execution is coming
-                    later with escrow support.
-                  </p>
-                </div>
-
-                <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                  {nativeListings.map((listing) => (
-                    <article
-                      key={listing.id}
-                      className="overflow-hidden rounded-2xl border border-sky-400/20 bg-white/[0.03]"
-                    >
-                      <div className="aspect-[4/3] bg-black/40">
-                        {listing.imageUrl ? (
-                          <img
-                            src={listing.imageUrl}
-                            alt={listing.name}
-                            className={`h-full w-full object-cover ${
-                              ageVerified ? "" : "blur-2xl"
-                            }`}
-                          />
-                        ) : (
-                          <div className="flex h-full items-center justify-center text-zinc-500">
-                            No preview image
-                          </div>
-                        )}
-                      </div>
-                      <div className="p-5">
-                        <div className="flex flex-wrap items-start justify-between gap-3">
-                          <div>
-                            <p className="text-sm font-semibold text-sky-300">
-                              Native Vertico NFT
-                            </p>
-                            <h3 className="mt-2 text-2xl font-bold">
-                              {listing.name}
-                            </h3>
-                          </div>
-                          <span className="rounded-full border border-sky-400/40 bg-sky-400/10 px-3 py-1 text-xs font-semibold text-sky-200">
-                            Vertico Verified
-                          </span>
-                        </div>
-                        <p className="mt-4 line-clamp-4 leading-7 text-zinc-300">
-                          {listing.description}
-                        </p>
-                        <div className="mt-5 grid gap-2 text-sm text-zinc-300">
-                          <p>Collection: {collectionLabel(listing.collectionType)}</p>
-                          <p>
-                            Price:{" "}
-                            {listing.priceSol === null
-                              ? "Price pending"
-                              : `${listing.priceSol} SOL`}
-                          </p>
-                          <p>Seller: {shortAddress(listing.sellerWallet)}</p>
-                          <p>Custody: {custodyLabel(listing.custodyStatus)}</p>
-                        </div>
-                        <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                          <button
-                            disabled
-                            className="rounded-xl bg-zinc-700 px-4 py-2 text-sm font-semibold text-zinc-300"
-                          >
-                            Buy Coming Soon
-                          </button>
-                          <button
-                            onClick={() => reportContent("listing", listing.id)}
-                            className="rounded-xl border border-red-400/40 px-4 py-2 text-sm font-semibold text-red-200 hover:bg-red-400/10"
-                          >
-                            Report
-                          </button>
-                        </div>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {collections.length > 0 && (
-              <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                {collections.map((collection) => {
-              const imageUrl = collection.previewImageUrls[0];
-              return (
-                <article
-                  key={collection.id}
-                  className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]"
-                >
+          <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {filteredItems.map((item) => (
+              <article key={`${item.kind}-${item.id}`} className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+                <Link href={item.href} className="block">
                   <div className="aspect-[4/3] bg-black/40">
-                    {imageUrl ? (
+                    {item.imageUrl ? (
                       <img
-                        src={imageUrl}
-                        alt={collection.collectionName}
-                        className={`h-full w-full object-cover ${
-                          ageVerified ? "" : "blur-2xl"
-                        }`}
+                        src={item.imageUrl}
+                        alt={item.name}
+                        className={`h-full w-full object-cover ${ageVerified ? "" : "blur-2xl"}`}
                       />
                     ) : (
                       <div className="flex h-full items-center justify-center text-zinc-500">
@@ -347,100 +437,95 @@ export default function MarketplaceClient() {
                       </div>
                     )}
                   </div>
-                  <div className="p-5">
-                    <div className="flex flex-wrap items-start justify-between gap-3">
-                      <div>
-                        <h2 className="text-2xl font-bold">
-                          {collection.collectionName}
-                        </h2>
-                        <p className="mt-1 text-sm text-zinc-400">
-                          {collection.creator?.display_name ||
-                            shortAddress(collection.creator?.wallet_address)}
-                        </p>
-                      </div>
-                      <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">
-                        Approved Collection
-                      </span>
+                </Link>
+                <div className="p-5">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-semibold text-sky-300">
+                        {item.kind === "native"
+                          ? "Native Vertico NFT"
+                          : "Approved Collection"}
+                      </p>
+                      <Link href={item.href} className="hover:text-amber-300">
+                        <h2 className="mt-2 text-2xl font-bold">{item.name}</h2>
+                      </Link>
                     </div>
-                    <p className="mt-4 line-clamp-4 leading-7 text-zinc-300">
-                      {collection.description}
-                    </p>
-                    <p className="mt-4 text-sm text-zinc-400">
-                      Chain: {collection.chain}
-                    </p>
-                    <div className="mt-5 flex flex-wrap gap-3">
-                      {collection.collectionAddress && (
-                        <a
-                          href={`https://explorer.solana.com/address/${collection.collectionAddress}?cluster=devnet`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="rounded-xl border border-white/15 px-4 py-2 text-sm font-semibold hover:bg-white/10"
-                        >
-                          View
-                        </a>
-                      )}
-                      <button
-                        onClick={() => reportContent("collection", collection.id)}
-                        className="rounded-xl border border-red-400/40 px-4 py-2 text-sm font-semibold text-red-200 hover:bg-red-400/10"
-                      >
-                        Report
-                      </button>
-                    </div>
-
-                    {collection.listings.length > 0 && (
-                      <div className="mt-5 border-t border-white/10 pt-5">
-                        <p className="text-sm font-semibold text-zinc-300">
-                          Approved listings
-                        </p>
-                        <div className="mt-3 space-y-3">
-                          {collection.listings.map((listing) => (
-                            <div
-                              key={listing.id}
-                              className="rounded-xl border border-white/10 bg-black/25 p-3"
-                            >
-                              <div className="flex gap-3">
-                                {listing.imageUrl ? (
-                                  <img
-                                    src={listing.imageUrl}
-                                    alt={listing.name}
-                                    className={`h-16 w-16 rounded-lg object-cover ${
-                                      ageVerified ? "" : "blur-xl"
-                                    }`}
-                                  />
-                                ) : (
-                                  <div className="h-16 w-16 rounded-lg bg-zinc-800" />
-                                )}
-                                <div className="min-w-0 flex-1">
-                                  <p className="font-semibold">
-                                    {listing.name}
-                                  </p>
-                                  <p className="mt-1 text-sm text-zinc-400">
-                                    {listing.priceSol
-                                      ? `${listing.priceSol} SOL`
-                                      : "Price pending"}
-                                  </p>
-                                </div>
-                                <button
-                                  onClick={() =>
-                                    reportContent("listing", listing.id)
-                                  }
-                                  className="self-start rounded-lg border border-red-400/30 px-3 py-1 text-xs font-semibold text-red-200 hover:bg-red-400/10"
-                                >
-                                  Report
-                                </button>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+                    <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+                      {item.kind === "native" ? "Vertico Verified" : "Approved"}
+                    </span>
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {item.kind === "native" ? (
+                      <>
+                        <span className="rounded-full border border-sky-400/30 px-3 py-1 text-xs font-semibold text-sky-200">
+                          Wallet-held
+                        </span>
+                        <span className="rounded-full border border-emerald-400/30 px-3 py-1 text-xs font-semibold text-emerald-200">
+                          Ownership Verified
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="rounded-full border border-sky-400/30 px-3 py-1 text-xs font-semibold text-sky-200">
+                          Creator Reviewed
+                        </span>
+                        <span className="rounded-full border border-red-400/30 px-3 py-1 text-xs font-semibold text-red-200">
+                          Reportable
+                        </span>
+                      </>
                     )}
                   </div>
-                </article>
-              );
-                })}
-              </div>
-            )}
-          </>
+                  <p className="mt-4 line-clamp-4 leading-7 text-zinc-300">
+                    {item.description}
+                  </p>
+                  <div className="mt-5 grid gap-2 text-sm text-zinc-300">
+                    {item.kind === "native" ? (
+                      <>
+                        <p>Collection: {collectionLabel(item.collectionType)}</p>
+                        <p>Price: {item.priceSol === null ? "Price pending" : `${item.priceSol} SOL`}</p>
+                        <p>Seller: {shortAddress(item.sellerWallet)}</p>
+                        <p>Custody: Wallet-held</p>
+                      </>
+                    ) : (
+                      <>
+                        <p>Chain: {item.chain}</p>
+                        <p>Creator: {item.creatorLabel}</p>
+                      </>
+                    )}
+                  </div>
+                  <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                    <Link href={item.href} className="rounded-xl bg-amber-500 px-4 py-2 text-center text-sm font-bold text-black hover:bg-amber-400">
+                      Details
+                    </Link>
+                    {item.kind === "collection" && item.creatorWallet && (
+                      <Link
+                        href={`/creators/${item.creatorWallet}`}
+                        className="rounded-xl border border-sky-400/40 px-4 py-2 text-center text-sm font-semibold text-sky-200 hover:bg-sky-400/10"
+                      >
+                        View Creator
+                      </Link>
+                    )}
+                    <button
+                      onClick={() =>
+                        reportContent(
+                          item.kind === "native" ? "listing" : "collection",
+                          item.id
+                        )
+                      }
+                      className="rounded-xl border border-red-400/40 px-4 py-2 text-sm font-semibold text-red-200 hover:bg-red-400/10"
+                    >
+                      Report
+                    </button>
+                  </div>
+                  {item.kind === "native" && (
+                    <button disabled className="mt-3 w-full rounded-xl bg-zinc-700 px-4 py-2 text-sm font-semibold text-zinc-300">
+                      Buy Coming Soon
+                    </button>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
         )}
       </section>
     </main>

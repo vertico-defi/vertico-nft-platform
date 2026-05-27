@@ -80,6 +80,25 @@ create table if not exists marketplace_listings (
   updated_at timestamptz not null default now()
 );
 
+alter table marketplace_listings
+  alter column marketplace_collection_id drop not null,
+  alter column image_url drop not null;
+
+alter table marketplace_listings
+  add column if not exists source text not null default 'external',
+  add column if not exists collection_type text,
+  add column if not exists owner_wallet text,
+  add column if not exists metadata_uri text,
+  add column if not exists attributes jsonb not null default '[]'::jsonb,
+  add column if not exists sale_status text not null default 'listed',
+  add column if not exists custody_status text not null default 'wallet_held';
+
+alter table if exists creator_profiles
+  add column if not exists bio text,
+  add column if not exists website_url text,
+  add column if not exists x_url text,
+  add column if not exists display_name text;
+
 create table if not exists content_reports (
   id uuid primary key default gen_random_uuid(),
   target_type text not null check (target_type in ('collection', 'listing')),

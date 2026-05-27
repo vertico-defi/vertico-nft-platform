@@ -1,60 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import WalletButton from "@/components/WalletButton";
-
-type MintAttribute = {
-  trait_type: string;
-  value: string;
-};
-
-type MintHistoryEntry = {
-  id: string;
-  timestamp: string;
-  network: "devnet";
-  collection: "pages" | "courtiers" | "royals";
-  name: string;
-  description: string;
-  attributes: MintAttribute[];
-  mintAddress: string;
-  recipient: string;
-  paymentSignature?: string;
-  paymentAmountSol?: number;
-  treasuryWallet?: string;
-  metadataUri: string;
-  imageUri: string;
-  explorer: string;
-  paymentExplorer?: string;
-  collectionExplorer: string;
-  source?: "supabase" | "onchain";
-};
-
-type MyNftsResponse = {
-  success: boolean;
-  wallet: string;
-  nfts: MintHistoryEntry[];
-  totals: {
-    total: number;
-    pages: number;
-    courtiers: number;
-    royals: number;
-  };
-};
-
-type NativeMarketplaceListing = {
-  id: string;
-  sellerWallet: string;
-  mintAddress: string | null;
-  priceSol: number | null;
-  saleStatus: string;
-};
-
-type MarketplaceResponse = {
-  success: boolean;
-  nativeListings?: NativeMarketplaceListing[];
-};
+import {
+  type NativeListingState,
+  type WalletNftEntry,
+  useWalletNfts,
+} from "@/hooks/useWalletNfts";
 
 type CharacterHolding = {
   name: string;
@@ -81,7 +35,7 @@ function shortAddress(value?: string) {
   return `${value.slice(0, 6)}...${value.slice(-6)}`;
 }
 
-function collectionLabel(collection: MintHistoryEntry["collection"]) {
+function collectionLabel(collection: WalletNftEntry["collection"]) {
   if (collection === "pages") return "Pages";
   if (collection === "courtiers") return "Courtiers";
   return "Royals";
@@ -160,96 +114,31 @@ async function createListingAuthHeaders({
 
 export default function MyNftsClient() {
   const { publicKey, connected, signMessage } = useWallet();
+  const {
+    nfts: history,
+    stats,
+    loading: isLoading,
+    refreshing,
+    error: loadError,
+    listingStateByMint,
+    listingStateLoading,
+    listingStateError,
+    refresh,
+    refreshListingState,
+    setListingStateForMint,
+  } = useWalletNfts();
 
   const mounted = useSyncExternalStore(
     subscribeToClientReady,
     getClientReadySnapshot,
     getServerReadySnapshot
   );
-  const [history, setHistory] = useState<MintHistoryEntry[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [loadError, setLoadError] = useState<string | null>(null);
   const [listingMessage, setListingMessage] = useState<string | null>(null);
   const [listingPrices, setListingPrices] = useState<Record<string, string>>({});
-  const [listingByMint, setListingByMint] = useState<
-    Record<string, NativeMarketplaceListing>
-  >({});
   const [busyListingMint, setBusyListingMint] = useState<string | null>(null);
   const [selectedCollection, setSelectedCollection] = useState<
     "all" | "pages" | "courtiers" | "royals"
   >("all");
-
-  useEffect(() => {
-    async function loadMyNfts() {
-      if (!publicKey) {
-        setHistory([]);
-        setListingByMint({});
-        return;
-      }
-
-      setIsLoading(true);
-      setLoadError(null);
-
-      try {
-        const wallet = publicKey.toBase58();
-
-        const response = await fetch(`/api/my-nfts?wallet=${wallet}`, {
-          cache: "no-store",
-        });
-
-        const data: MyNftsResponse = await response.json();
-
-        if (!response.ok || !data.success) {
-          throw new Error("Could not load wallet NFTs.");
-        }
-
-        setHistory(data.nfts || []);
-
-        try {
-          const marketplaceResponse = await fetch(
-            "/api/marketplace/collections/approved",
-            {
-              cache: "no-store",
-            }
-          );
-          const marketplaceData: MarketplaceResponse =
-            await marketplaceResponse.json();
-
-          if (!marketplaceResponse.ok || !marketplaceData.success) {
-            throw new Error("Could not load marketplace listing state.");
-          }
-
-          const nextListingByMint: Record<string, NativeMarketplaceListing> = {};
-
-          for (const listing of marketplaceData.nativeListings || []) {
-            if (listing.mintAddress) {
-              nextListingByMint[listing.mintAddress] = listing;
-            }
-          }
-
-          setListingByMint(nextListingByMint);
-          setListingMessage(null);
-        } catch (listingStateError) {
-          setListingByMint({});
-          setListingMessage(
-            listingStateError instanceof Error
-              ? listingStateError.message
-              : "Could not load marketplace listing state."
-          );
-        }
-      } catch (error) {
-        setLoadError(
-          error instanceof Error ? error.message : "Could not load wallet NFTs."
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    if (mounted) {
-      loadMyNfts();
-    }
-  }, [mounted, publicKey]);
 
   const walletAddress = publicKey?.toBase58();
 
@@ -260,7 +149,7 @@ export default function MyNftsClient() {
     return createListingAuthHeaders({ walletAddress, lines, signMessage });
   }
 
-  async function createListing(item: MintHistoryEntry) {
+  async function createListing(item: WalletNftEntry) {
     if (!walletAddress) {
       setListingMessage("Connect your wallet before listing.");
       return;
@@ -297,19 +186,13 @@ export default function MyNftsClient() {
         throw new Error(data.error || "Could not create marketplace listing.");
       }
 
-      setListingByMint((current) => ({
-        ...current,
-        [item.mintAddress]: {
-          id: data.listing.id,
-          sellerWallet: data.listing.seller_wallet,
-          mintAddress: data.listing.mint_address,
-          priceSol:
-            data.listing.price_sol === null
-              ? null
-              : Number(data.listing.price_sol),
-          saleStatus: data.listing.sale_status,
-        },
-      }));
+      setListingStateForMint(item.mintAddress, {
+        listingId: data.listing.id,
+        priceSol:
+          data.listing.price_sol === null ? null : Number(data.listing.price_sol),
+        saleStatus: data.listing.sale_status,
+        status: data.listing.status,
+      });
       setListingPrices((current) => ({ ...current, [item.mintAddress]: "" }));
       setListingMessage("Listed on marketplace.");
     } catch (error) {
@@ -323,26 +206,26 @@ export default function MyNftsClient() {
     }
   }
 
-  async function cancelListing(listing: NativeMarketplaceListing) {
+  async function cancelListing(listing: NativeListingState, mintAddress: string) {
     if (!walletAddress) {
       setListingMessage("Connect your wallet before cancelling.");
       return;
     }
 
-    setBusyListingMint(listing.mintAddress);
+    setBusyListingMint(mintAddress);
     setListingMessage(null);
 
     try {
       const authHeaders = await listingAuthHeaders([
         "Action: cancel_native_listing",
-        `Listing: ${listing.id}`,
+        `Listing: ${listing.listingId}`,
       ]);
       const response = await fetch("/api/marketplace/listings/cancel-native", {
         method: "POST",
         headers: { ...authHeaders, "Content-Type": "application/json" },
         body: JSON.stringify({
           walletAddress,
-          listingId: listing.id,
+          listingId: listing.listingId,
         }),
       });
       const data = await response.json();
@@ -351,15 +234,8 @@ export default function MyNftsClient() {
         throw new Error(data.error || "Could not cancel marketplace listing.");
       }
 
-      setListingByMint((current) => {
-        const next = { ...current };
-
-        if (listing.mintAddress) {
-          delete next[listing.mintAddress];
-        }
-
-        return next;
-      });
+      setListingStateForMint(mintAddress, null);
+      void refreshListingState();
       setListingMessage("Marketplace listing cancelled.");
     } catch (error) {
       setListingMessage(
@@ -380,13 +256,15 @@ export default function MyNftsClient() {
   }, [history, selectedCollection]);
 
   const myTotals = useMemo(() => {
+    if (stats) return stats;
+
     return {
       total: history.length,
       pages: history.filter((item) => item.collection === "pages").length,
       courtiers: history.filter((item) => item.collection === "courtiers").length,
       royals: history.filter((item) => item.collection === "royals").length,
     };
-  }, [history]);
+  }, [history, stats]);
 
   const collectorRank = useMemo(() => {
     return getCollectorRank(myTotals.total);
@@ -447,6 +325,12 @@ export default function MyNftsClient() {
 
           <div className="flex items-center gap-3">
             <Link
+              href="/marketplace"
+              className="text-sm font-semibold text-sky-400"
+            >
+              Go to Marketplace →
+            </Link>
+            <Link
               href="/mint"
               className="text-sm font-semibold text-emerald-400"
             >
@@ -488,9 +372,31 @@ export default function MyNftsClient() {
               )}
             </div>
 
-            <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">
-              Devnet On-Chain Scan
-            </span>
+            <div className="flex flex-wrap items-center gap-3">
+              {refreshing && (
+                <span className="rounded-full border border-sky-400/40 bg-sky-400/10 px-3 py-1 text-xs font-semibold text-sky-200">
+                  Refreshing on-chain ownership...
+                </span>
+              )}
+              {listingStateLoading && (
+                <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-xs font-semibold text-amber-200">
+                  Syncing listing state...
+                </span>
+              )}
+              <button
+                onClick={() => {
+                  void refresh();
+                  void refreshListingState();
+                }}
+                disabled={!connected || isLoading || refreshing}
+                className="rounded-xl border border-white/15 px-4 py-2 text-sm font-semibold text-zinc-200 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                Refresh NFTs
+              </button>
+              <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+                Devnet On-Chain Scan
+              </span>
+            </div>
           </div>
 
           <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -513,6 +419,21 @@ export default function MyNftsClient() {
               <p className="text-sm text-zinc-400">Royals</p>
               <p className="mt-2 text-3xl font-bold">{myTotals.royals}</p>
             </div>
+          </div>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-sky-400/20 bg-sky-400/10 p-5">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <p className="max-w-3xl text-sm leading-6 text-sky-100">
+              Browse the marketplace, view listed Vertico NFTs, and discover
+              approved collections.
+            </p>
+            <Link
+              href="/marketplace"
+              className="rounded-xl bg-sky-400 px-5 py-3 text-sm font-bold text-black hover:bg-sky-300"
+            >
+              View Marketplace
+            </Link>
           </div>
         </div>
 
@@ -646,10 +567,27 @@ export default function MyNftsClient() {
           ))}
         </div>
 
-        {loadError && (
+        {loadError && history.length === 0 && (
           <div className="mt-8 rounded-2xl border border-red-400/30 bg-red-400/10 p-5">
             <p className="font-semibold text-red-300">Could not load NFTs</p>
             <p className="mt-2 text-sm text-red-200">{loadError}</p>
+          </div>
+        )}
+
+        {loadError && history.length > 0 && (
+          <div className="mt-8 rounded-2xl border border-amber-400/30 bg-amber-400/10 p-5 text-sm text-amber-100">
+            Showing cached NFTs. Latest refresh failed: {loadError}
+          </div>
+        )}
+
+        {listingStateError && (
+          <div className="mt-8 rounded-2xl border border-amber-400/30 bg-amber-400/10 p-5">
+            <p className="font-semibold text-amber-100">
+              Marketplace listing state unavailable
+            </p>
+            <p className="mt-2 text-sm text-amber-100/80">
+              {listingStateError}
+            </p>
           </div>
         )}
 
@@ -684,15 +622,25 @@ export default function MyNftsClient() {
             <h2 className="text-3xl font-bold">No Vertico NFTs found</h2>
             <p className="mx-auto mt-4 max-w-xl text-zinc-400">
               This wallet does not currently hold any verified Vertico devnet
-              NFTs from the known Pages, Courtiers, or Royals collections.
+              NFTs from the known Pages, Courtiers, or Royals collections. You
+              can mint your first NFT or browse the marketplace to see listed
+              Vertico NFTs.
             </p>
 
-            <Link
-              href="/mint"
-              className="mt-6 inline-block rounded-xl bg-amber-500 px-6 py-3 font-bold text-black transition hover:bg-amber-400"
-            >
-              Mint your first NFT
-            </Link>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Link
+                href="/mint"
+                className="rounded-xl bg-amber-500 px-6 py-3 font-bold text-black transition hover:bg-amber-400"
+              >
+                Mint your first NFT
+              </Link>
+              <Link
+                href="/marketplace"
+                className="rounded-xl border border-sky-400/40 px-6 py-3 font-bold text-sky-200 transition hover:bg-sky-400/10"
+              >
+                View Marketplace
+              </Link>
+            </div>
           </div>
         )}
 
@@ -702,7 +650,7 @@ export default function MyNftsClient() {
               <NftCard
                 key={item.id}
                 item={item}
-                activeListing={listingByMint[item.mintAddress]}
+                activeListing={listingStateByMint[item.mintAddress]}
                 busyListingMint={busyListingMint}
                 listingPrice={listingPrices[item.mintAddress] || ""}
                 walletAddress={walletAddress}
@@ -713,7 +661,9 @@ export default function MyNftsClient() {
                   }))
                 }
                 onCreateListing={() => createListing(item)}
-                onCancelListing={cancelListing}
+                onCancelListing={(listing) =>
+                  cancelListing(listing, item.mintAddress)
+                }
               />
             ))}
           </div>
@@ -733,18 +683,17 @@ function NftCard({
   onCreateListing,
   onCancelListing,
 }: {
-  item: MintHistoryEntry;
-  activeListing?: NativeMarketplaceListing;
+  item: WalletNftEntry;
+  activeListing?: NativeListingState;
   busyListingMint: string | null;
   listingPrice: string;
   walletAddress?: string;
   onListingPriceChange: (value: string) => void;
   onCreateListing: () => void;
-  onCancelListing: (listing: NativeMarketplaceListing) => void;
+  onCancelListing: (listing: NativeListingState) => void;
 }) {
   const isBusy = busyListingMint === item.mintAddress;
-  const isOwnListing =
-    activeListing?.sellerWallet && activeListing.sellerWallet === walletAddress;
+  const isOwnListing = Boolean(activeListing && walletAddress);
 
   return (
     <article className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-xl">

@@ -86,13 +86,12 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
+    console.error("Native listing cancellation failed", error);
+
     return NextResponse.json(
       {
         success: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "Could not cancel native marketplace listing.",
+        error: "Could not cancel marketplace listing right now.",
       },
       { status: 500 }
     );

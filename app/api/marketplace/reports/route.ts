@@ -8,6 +8,16 @@ function requiredString(value: unknown) {
   return typeof value === "string" && value.trim().length > 0;
 }
 
+const allowedReasons = new Set([
+  "Illegal content",
+  "Non-consensual content",
+  "Rights issue",
+  "Age/performer concern",
+  "Stolen content",
+  "Misleading listing",
+  "Other",
+]);
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -22,6 +32,15 @@ export async function POST(request: NextRequest) {
     if (!requiredString(body.targetId) || !requiredString(body.reason)) {
       return NextResponse.json(
         { success: false, error: "Target and reason are required." },
+        { status: 400 }
+      );
+    }
+
+    const reason = body.reason.trim();
+
+    if (!allowedReasons.has(reason)) {
+      return NextResponse.json(
+        { success: false, error: "Report reason is invalid." },
         { status: 400 }
       );
     }
@@ -60,7 +79,7 @@ export async function POST(request: NextRequest) {
         reporter_wallet: requiredString(body.reporterWallet)
           ? body.reporterWallet.trim()
           : null,
-        reason: body.reason.trim(),
+        reason,
         details: requiredString(body.details) ? body.details.trim() : null,
         status: "open",
       })
@@ -71,13 +90,12 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, report: data });
   } catch (error) {
+    console.error("Content report submission failed", error);
+
     return NextResponse.json(
       {
         success: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "Could not create content report.",
+        error: "Could not submit report right now. Please try again later.",
       },
       { status: 500 }
     );

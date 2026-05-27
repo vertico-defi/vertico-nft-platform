@@ -124,13 +124,12 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, listing: data });
   } catch (error) {
+    console.error("Native listing creation failed", error);
+
     return NextResponse.json(
       {
         success: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "Could not create native marketplace listing.",
+        error: "Could not create marketplace listing right now.",
       },
       { status: 500 }
     );

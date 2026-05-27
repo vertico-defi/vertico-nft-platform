@@ -13,6 +13,7 @@ import {
   SolflareWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
 import { clusterApiUrl } from "@solana/web3.js";
+import { WalletNftProvider } from "@/components/WalletNftProvider";
 
 import "@solana/wallet-adapter-react-ui/styles.css";
 
@@ -36,7 +37,9 @@ export default function WalletContextProvider({
   return (
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} autoConnect>
-        <WalletModalProvider>{children}</WalletModalProvider>
+        <WalletModalProvider>
+          <WalletNftProvider>{children}</WalletNftProvider>
+        </WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>
   );

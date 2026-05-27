@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
   LAMPORTS_PER_SOL,
@@ -140,6 +141,7 @@ export default function MintClient() {
       }
 
       setMintResult(data);
+      window.dispatchEvent(new CustomEvent("vertico:nfts:refresh"));
     } catch (error) {
       setMintError(
         error instanceof Error ? error.message : "Unknown minting error."
@@ -153,17 +155,24 @@ export default function MintClient() {
     <main className="min-h-screen bg-zinc-950 px-6 py-10 text-white">
       <section className="mx-auto max-w-5xl">
         <nav className="mb-10 flex flex-wrap items-center justify-between gap-4">
-          <a href="/" className="text-sm font-semibold text-amber-400">
+          <Link href="/" className="text-sm font-semibold text-amber-400">
             ← Back home
-          </a>
+          </Link>
 
           <div className="flex flex-wrap items-center gap-3">
-            <a
+            <Link
+              href="/marketplace"
+              className="text-sm font-semibold text-sky-400"
+            >
+              Marketplace →
+            </Link>
+
+            <Link
               href="/mynfts"
               className="text-sm font-semibold text-emerald-400"
             >
               My NFTs →
-            </a>
+            </Link>
 
             <span className="rounded-full border border-emerald-400/40 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">
               Devnet
@@ -397,19 +406,26 @@ export default function MintClient() {
                       View Collection
                     </a>
 
-                    <a
+                    <Link
                       href="/mynfts"
                       className="rounded-xl border border-amber-400/40 px-5 py-3 text-center font-bold text-amber-300 transition hover:bg-amber-400/10"
                     >
                       View My NFTs
-                    </a>
+                    </Link>
+
+                    <Link
+                      href="/marketplace"
+                      className="rounded-xl border border-sky-400/40 px-5 py-3 text-center font-bold text-sky-300 transition hover:bg-sky-400/10"
+                    >
+                      View Marketplace
+                    </Link>
 
                     <button
                       onClick={() => {
                         setMintResult(null);
                         setMintError(null);
                       }}
-                      className="rounded-xl border border-white/15 px-5 py-3 text-center font-bold text-white transition hover:bg-white/10 sm:col-span-2"
+                      className="rounded-xl border border-white/15 px-5 py-3 text-center font-bold text-white transition hover:bg-white/10"
                     >
                       Mint Another
                     </button>

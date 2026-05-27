@@ -78,6 +78,7 @@ export async function POST(request: NextRequest) {
           wallet_address: walletAddress,
           email: body.email.trim(),
           display_name: body.displayName.trim(),
+          bio: requiredString(body.bio) ? body.bio.trim() : null,
           country: body.country.trim(),
           website_url: requiredString(body.websiteUrl)
             ? body.websiteUrl.trim()
@@ -95,13 +96,12 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, creator: data });
   } catch (error) {
+    console.error("Creator application submission failed", error);
+
     return NextResponse.json(
       {
         success: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "Could not submit creator application.",
+        error: "Could not submit creator application right now.",
       },
       { status: 500 }
     );

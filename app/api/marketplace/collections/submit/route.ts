@@ -136,13 +136,12 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, submission: data });
   } catch (error) {
+    console.error("Collection submission failed", error);
+
     return NextResponse.json(
       {
         success: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "Could not submit marketplace collection.",
+        error: "Could not submit collection right now.",
       },
       { status: 500 }
     );

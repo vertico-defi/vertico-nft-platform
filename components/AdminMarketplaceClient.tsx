@@ -72,12 +72,25 @@ type ContentReport = {
   created_at: string;
 };
 
+type AuditLog = {
+  id: string;
+  actor_wallet: string | null;
+  event_type: string;
+  target_type: string | null;
+  target_id: string | null;
+  metadata: Record<string, unknown> | null;
+  created_at: string;
+};
+
 type AdminData = {
   pendingCreators: CreatorProfile[];
   pendingSubmissions: CollectionSubmission[];
   openReports: ContentReport[];
   approvedCollections: MarketplaceCollection[];
   nativeListings: NativeMarketplaceListing[];
+  suspendedCollections: MarketplaceCollection[];
+  suspendedListings: NativeMarketplaceListing[];
+  auditLogs: AuditLog[];
 };
 
 type AdminAction =
@@ -89,9 +102,11 @@ type AdminAction =
   | "suspend_marketplace_collection"
   | "hide_listing"
   | "suspend_listing"
+  | "revalidate_listing_ownership"
   | "review_report"
   | "resolve_report"
-  | "dismiss_report";
+  | "dismiss_report"
+  | "suspend_report_target";
 
 const ADMIN_WALLET = "znwtFnSfXnaCDfkpTUwaE5eKFa9ENTa763LV88cqJSN";
 
@@ -141,10 +156,21 @@ export default function AdminMarketplaceClient() {
     openReports: [],
     approvedCollections: [],
     nativeListings: [],
+    suspendedCollections: [],
+    suspendedListings: [],
+    auditLogs: [],
   });
   const [activeTab, setActiveTab] = useState<
-    "creators" | "submissions" | "collections" | "native" | "reports"
+    | "creators"
+    | "submissions"
+    | "collections"
+    | "native"
+    | "reports"
+    | "audit"
   >("creators");
+  const [auditFilter, setAuditFilter] = useState<
+    "all" | "reports" | "listings" | "collections" | "creators"
+  >("all");
   const [isLoading, setIsLoading] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -191,6 +217,9 @@ export default function AdminMarketplaceClient() {
         openReports: result.openReports || [],
         approvedCollections: result.approvedCollections || [],
         nativeListings: result.nativeListings || [],
+        suspendedCollections: result.suspendedCollections || [],
+        suspendedListings: result.suspendedListings || [],
+        auditLogs: result.auditLogs || [],
       });
       setHasLoaded(true);
     } catch (error) {
@@ -234,6 +263,36 @@ export default function AdminMarketplaceClient() {
     }
   }
 
+  async function revalidateAllNativeListings() {
+    setIsLoading(true);
+    setMessage(null);
+
+    try {
+      const headers = await adminHeaders();
+      const response = await fetch(
+        "/api/admin/marketplace/revalidate-native-listings",
+        {
+          method: "POST",
+          headers,
+        }
+      );
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || "Revalidation failed.");
+      }
+
+      setMessage(
+        `Revalidated ${result.checked} native listing(s); suspended ${result.suspended}.`
+      );
+      await loadAdminData();
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "Revalidation failed.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <main className="min-h-screen bg-zinc-950 px-6 py-8 text-white">
       <section className="mx-auto max-w-7xl">
@@ -247,6 +306,18 @@ export default function AdminMarketplaceClient() {
               className="rounded-xl border border-emerald-400/40 px-4 py-2 text-sm font-semibold text-emerald-300 hover:bg-emerald-400/10"
             >
               Marketplace
+            </Link>
+            <Link
+              href="/admin/test-checklist"
+              className="rounded-xl border border-sky-400/40 px-4 py-2 text-sm font-semibold text-sky-300 hover:bg-sky-400/10"
+            >
+              Test Checklist
+            </Link>
+            <Link
+              href="/admin/diagnostics"
+              className="rounded-xl border border-amber-400/40 px-4 py-2 text-sm font-semibold text-amber-300 hover:bg-amber-400/10"
+            >
+              Diagnostics
             </Link>
             <WalletButton />
           </div>
@@ -319,8 +390,12 @@ export default function AdminMarketplaceClient() {
                   "collections",
                   `Approved collections (${data.approvedCollections.length})`,
                 ],
-                ["native", `Native listings (${data.nativeListings.length})`],
+                [
+                  "native",
+                  `Native listings (${data.nativeListings.length})`,
+                ],
                 ["reports", `Open reports (${data.openReports.length})`],
+                ["audit", `Audit logs (${data.auditLogs.length})`],
               ].map(([id, label]) => (
                 <button
                   key={id}
@@ -332,6 +407,7 @@ export default function AdminMarketplaceClient() {
                         | "collections"
                         | "native"
                         | "reports"
+                        | "audit"
                     )
                   }
                   className={`rounded-xl border px-4 py-2 text-sm font-semibold ${
@@ -480,6 +556,14 @@ export default function AdminMarketplaceClient() {
                               collection.creator_profiles?.wallet_address
                             )}
                         </p>
+                        {collection.creator_profiles?.wallet_address && (
+                          <Link
+                            href={`/creators/${collection.creator_profiles.wallet_address}`}
+                            className="mt-3 inline-flex rounded-xl border border-sky-400/40 px-3 py-2 text-xs font-bold text-sky-200 hover:bg-sky-400/10"
+                          >
+                            View Creator
+                          </Link>
+                        )}
                         <p className="mt-3 leading-7 text-zinc-300">
                           {collection.description}
                         </p>
@@ -498,11 +582,34 @@ export default function AdminMarketplaceClient() {
                 {data.approvedCollections.length === 0 && (
                   <EmptyState label="No approved marketplace collections." />
                 )}
+                {data.suspendedCollections.length > 0 && (
+                  <div className="rounded-2xl border border-amber-400/20 bg-amber-400/10 p-5">
+                    <h2 className="text-xl font-bold text-amber-100">
+                      Suspended collections
+                    </h2>
+                    <div className="mt-4 grid gap-3">
+                      {data.suspendedCollections.map((collection) => (
+                        <p key={collection.id} className="text-sm text-amber-100">
+                          {collection.collection_name} · {collection.chain}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
             {activeTab === "native" && (
               <div className="mt-6 grid gap-4">
+                <div className="flex justify-end">
+                  <button
+                    onClick={revalidateAllNativeListings}
+                    disabled={isLoading}
+                    className="rounded-xl border border-sky-400/40 px-4 py-2 text-sm font-bold text-sky-200 hover:bg-sky-400/10 disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    Revalidate All Ownership
+                  </button>
+                </div>
                 {data.nativeListings.map((listing) => (
                   <section
                     key={listing.id}
@@ -524,6 +631,16 @@ export default function AdminMarketplaceClient() {
                             : `${Number(listing.price_sol)} SOL`}{" "}
                           · Custody: {listing.custody_status}
                         </p>
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          <span className="rounded-full border border-white/15 px-3 py-1 text-xs font-semibold text-zinc-300">
+                            {listing.sale_status}
+                          </span>
+                          {listing.sale_status === "hidden" && (
+                            <span className="rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-xs font-semibold text-amber-200">
+                              Ownership Stale
+                            </span>
+                          )}
+                        </div>
                         <p className="mt-3 break-all font-mono text-xs text-zinc-500">
                           Seller: {listing.seller_wallet}
                         </p>
@@ -545,6 +662,20 @@ export default function AdminMarketplaceClient() {
                         </button>
                         <button
                           onClick={() =>
+                            runAction("revalidate_listing_ownership", listing.id)
+                          }
+                          className="rounded-xl border border-sky-400/40 px-4 py-2 text-sm font-bold text-sky-200 hover:bg-sky-400/10"
+                        >
+                          Revalidate Ownership
+                        </button>
+                        <Link
+                          href={`/marketplace/listing/${listing.id}`}
+                          className="rounded-xl border border-white/15 px-4 py-2 text-sm font-bold text-zinc-200 hover:bg-white/10"
+                        >
+                          View Detail
+                        </Link>
+                        <button
+                          onClick={() =>
                             runAction("suspend_listing", listing.id)
                           }
                           className="rounded-xl border border-amber-400/40 px-4 py-2 text-sm font-bold text-amber-200 hover:bg-amber-400/10"
@@ -557,6 +688,21 @@ export default function AdminMarketplaceClient() {
                 ))}
                 {data.nativeListings.length === 0 && (
                   <EmptyState label="No active native Vertico listings." />
+                )}
+                {data.suspendedListings.length > 0 && (
+                  <div className="rounded-2xl border border-amber-400/20 bg-amber-400/10 p-5">
+                    <h2 className="text-xl font-bold text-amber-100">
+                      Suspended native listings
+                    </h2>
+                    <div className="mt-4 grid gap-3">
+                      {data.suspendedListings.map((listing) => (
+                        <p key={listing.id} className="text-sm text-amber-100">
+                          {listing.name} · Suspended / Ownership Stale ·{" "}
+                          {shortAddress(listing.seller_wallet)}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
                 )}
               </div>
             )}
@@ -608,6 +754,14 @@ export default function AdminMarketplaceClient() {
                         >
                           Dismiss Report
                         </button>
+                        <button
+                          onClick={() =>
+                            runAction("suspend_report_target", report.id)
+                          }
+                          className="rounded-xl border border-red-400/40 px-4 py-2 text-sm font-bold text-red-200 hover:bg-red-400/10"
+                        >
+                          Suspend Target
+                        </button>
                       </div>
                     </div>
                   </section>
@@ -615,6 +769,93 @@ export default function AdminMarketplaceClient() {
                 {data.openReports.length === 0 && (
                   <EmptyState label="No open reports." />
                 )}
+              </div>
+            )}
+
+            {activeTab === "audit" && (
+              <div className="mt-6">
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    ["all", "All"],
+                    ["reports", "Reports"],
+                    ["listings", "Listings"],
+                    ["collections", "Collections"],
+                    ["creators", "Creators"],
+                  ].map(([id, label]) => (
+                    <button
+                      key={id}
+                      onClick={() =>
+                        setAuditFilter(
+                          id as
+                            | "all"
+                            | "reports"
+                            | "listings"
+                            | "collections"
+                            | "creators"
+                        )
+                      }
+                      className={`rounded-xl border px-3 py-2 text-sm font-semibold ${
+                        auditFilter === id
+                          ? "border-amber-400 bg-amber-400 text-black"
+                          : "border-white/15 text-zinc-200 hover:bg-white/10"
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="mt-5 grid gap-3">
+                  {data.auditLogs
+                    .filter((log) => {
+                      if (auditFilter === "all") return true;
+                      if (auditFilter === "reports") {
+                        return log.target_type === "content_report";
+                      }
+                      if (auditFilter === "listings") {
+                        return log.target_type === "marketplace_listing";
+                      }
+                      if (auditFilter === "collections") {
+                        return (
+                          log.target_type === "marketplace_collection" ||
+                          log.target_type === "collection_submission"
+                        );
+                      }
+                      return log.target_type === "creator_profile";
+                    })
+                    .map((log) => (
+                      <section
+                        key={log.id}
+                        className="rounded-2xl border border-white/10 bg-white/[0.03] p-4"
+                      >
+                        <div className="flex flex-wrap items-start justify-between gap-3">
+                          <div>
+                            <p className="font-semibold text-zinc-100">
+                              {log.event_type}
+                            </p>
+                            <p className="mt-1 text-sm text-zinc-400">
+                              {log.target_type || "unknown target"} ·{" "}
+                              {log.target_id || "no target id"}
+                            </p>
+                          </div>
+                          <p className="text-xs text-zinc-500">
+                            {formatDate(log.created_at)}
+                          </p>
+                        </div>
+                        <p className="mt-3 break-all font-mono text-xs text-zinc-500">
+                          Actor: {log.actor_wallet || "system"}
+                        </p>
+                        {log.metadata && Object.keys(log.metadata).length > 0 && (
+                          <p className="mt-3 line-clamp-3 break-all rounded-xl bg-black/30 p-3 font-mono text-xs text-zinc-400">
+                            {JSON.stringify(log.metadata)}
+                          </p>
+                        )}
+                      </section>
+                    ))}
+                  {data.auditLogs.length === 0 && (
+                    <EmptyState label="No audit logs found." />
+                  )}
+                </div>
               </div>
             )}
           </>

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidateNativeListingOwnership } from "@/lib/nativeListingRevalidation";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export const runtime = "nodejs";
@@ -94,6 +95,22 @@ export async function GET() {
 
     const listings = (listingsData || []) as MarketplaceListingRow[];
     const nativeListings = (nativeListingsData || []) as MarketplaceListingRow[];
+    const currentNativeListings: MarketplaceListingRow[] = [];
+
+    for (const listing of nativeListings) {
+      const result = await revalidateNativeListingOwnership({
+        listing: {
+          id: listing.id,
+          seller_wallet: listing.seller_wallet,
+          mint_address: listing.mint_address,
+          collection_type: listing.collection_type,
+        },
+      });
+
+      if (result.isCurrentOwner) {
+        currentNativeListings.push(listing);
+      }
+    }
     const creators = (creatorsData || []) as CreatorProfileRow[];
 
     const creatorById = new Map(
@@ -118,7 +135,7 @@ export async function GET() {
 
     return NextResponse.json({
       success: true,
-      nativeListings: nativeListings.map((listing) => ({
+      nativeListings: currentNativeListings.map((listing) => ({
         id: listing.id,
         source: listing.source,
         collectionType: listing.collection_type,
@@ -129,7 +146,7 @@ export async function GET() {
         name: listing.name,
         description: listing.description,
         imageUrl: listing.image_url,
-        attributes: listing.attributes || [],
+        attributes: Array.isArray(listing.attributes) ? listing.attributes : [],
         priceSol: listing.price_sol === null ? null : Number(listing.price_sol),
         status: listing.status,
         saleStatus: listing.sale_status,
@@ -146,7 +163,9 @@ export async function GET() {
         chain: collection.chain,
         collectionAddress: collection.collection_address,
         description: collection.description,
-        previewImageUrls: collection.preview_image_urls || [],
+        previewImageUrls: Array.isArray(collection.preview_image_urls)
+          ? collection.preview_image_urls
+          : [],
         status: collection.status,
         createdAt: collection.created_at,
         updatedAt: collection.updated_at,
@@ -169,13 +188,12 @@ export async function GET() {
       })),
     });
   } catch (error) {
+    console.error("Approved marketplace load failed", error);
+
     return NextResponse.json(
       {
         success: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "Could not load approved marketplace collections.",
+        error: "Marketplace data is temporarily unavailable.",
       },
       { status: 500 }
     );

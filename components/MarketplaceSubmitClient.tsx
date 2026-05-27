@@ -107,6 +107,24 @@ export default function MarketplaceSubmitClient() {
             collection stays private in pending review until an admin approves
             it for public marketplace display.
           </p>
+          <div className="mt-6 rounded-2xl border border-sky-400/20 bg-sky-400/10 p-5 text-sm leading-6 text-sky-100">
+            Submitted collections are private until approved. Do not submit
+            explicit previews if they cannot be safely gated or reviewed in the
+            current UI. Use professional preview images where possible. All
+            submissions are subject to review and removal.
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {["Pending review", "Approved", "Rejected", "Suspended"].map(
+              (status) => (
+                <span
+                  key={status}
+                  className="rounded-full border border-white/15 px-3 py-1 text-xs font-semibold text-zinc-300"
+                >
+                  {status}
+                </span>
+              )
+            )}
+          </div>
         </header>
 
         <MarketplacePolicy />
@@ -201,17 +219,17 @@ export default function MarketplaceSubmitClient() {
               [
                 consentAttestation,
                 setConsentAttestation,
-                "I have verified consent for all depicted persons and uses.",
+                "I have verified consent for all depicted persons and intended uses.",
               ],
               [
                 adultPerformerAttestation,
                 setAdultPerformerAttestation,
-                "All performers or depicted persons are 18+.",
+                "All performers or depicted persons are 18 or older and not age-ambiguous.",
               ],
               [
                 prohibitedContentAttestation,
                 setProhibitedContentAttestation,
-                "This collection contains no prohibited content listed above.",
+                "This collection contains no illegal, non-consensual, stolen, age-ambiguous, exploitative, or otherwise prohibited content.",
               ],
             ].map(([checked, setChecked, label]) => (
               <label

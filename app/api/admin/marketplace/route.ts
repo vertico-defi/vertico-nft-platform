@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAdminSignature } from "@/lib/adminAuth";
+import { revalidateNativeListingOwnership } from "@/lib/nativeListingRevalidation";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export const runtime = "nodejs";
@@ -14,9 +15,11 @@ type AdminAction =
   | "suspend_marketplace_collection"
   | "hide_listing"
   | "suspend_listing"
+  | "revalidate_listing_ownership"
   | "review_report"
   | "resolve_report"
-  | "dismiss_report";
+  | "dismiss_report"
+  | "suspend_report_target";
 
 function getAdminAuth(request: NextRequest) {
   return verifyAdminSignature({
@@ -93,6 +96,9 @@ export async function GET(request: NextRequest) {
       openReports,
       approvedCollections,
       nativeListings,
+      suspendedCollections,
+      suspendedListings,
+      auditLogs,
     ] = await Promise.all([
       supabaseAdmin
         .from("creator_profiles")
@@ -118,8 +124,24 @@ export async function GET(request: NextRequest) {
         .from("marketplace_listings")
         .select("*")
         .eq("source", "vertico_native")
-        .eq("sale_status", "listed")
+        .in("sale_status", ["listed", "hidden"])
         .order("created_at", { ascending: false }),
+      supabaseAdmin
+        .from("marketplace_collections")
+        .select("*, creator_profiles(display_name, wallet_address)")
+        .eq("status", "suspended")
+        .order("updated_at", { ascending: false }),
+      supabaseAdmin
+        .from("marketplace_listings")
+        .select("*")
+        .eq("source", "vertico_native")
+        .eq("status", "suspended")
+        .order("updated_at", { ascending: false }),
+      supabaseAdmin
+        .from("audit_logs")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(80),
     ]);
 
     for (const result of [
@@ -128,6 +150,9 @@ export async function GET(request: NextRequest) {
       openReports,
       approvedCollections,
       nativeListings,
+      suspendedCollections,
+      suspendedListings,
+      auditLogs,
     ]) {
       if (result.error) throw new Error(result.error.message);
     }
@@ -139,6 +164,9 @@ export async function GET(request: NextRequest) {
       openReports: openReports.data || [],
       approvedCollections: approvedCollections.data || [],
       nativeListings: nativeListings.data || [],
+      suspendedCollections: suspendedCollections.data || [],
+      suspendedListings: suspendedListings.data || [],
+      auditLogs: auditLogs.data || [],
     });
   } catch (error) {
     return NextResponse.json(
@@ -358,6 +386,42 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: true, result: data });
     }
 
+    if (body.action === "revalidate_listing_ownership") {
+      const { data: listing, error } = await supabaseAdmin
+        .from("marketplace_listings")
+        .select("id, seller_wallet, mint_address, collection_type")
+        .eq("id", body.targetId)
+        .eq("source", "vertico_native")
+        .single();
+
+      if (error) throw new Error(error.message);
+
+      const result = await revalidateNativeListingOwnership({
+        listing,
+        actorWallet: auth.wallet,
+        writeReview: true,
+      });
+
+      await writeReview({
+        adminWallet: auth.wallet,
+        targetType: "marketplace_listing",
+        targetId: body.targetId,
+        decision: body.action,
+        notes: result.isCurrentOwner
+          ? notes || "Seller still owns listed NFT"
+          : notes || "Seller no longer owns listed NFT",
+      });
+      await writeAudit({
+        adminWallet: auth.wallet,
+        eventType: body.action,
+        targetType: "marketplace_listing",
+        targetId: body.targetId,
+        metadata: result,
+      });
+
+      return NextResponse.json({ success: true, result });
+    }
+
     if (
       body.action === "review_report" ||
       body.action === "resolve_report" ||
@@ -394,6 +458,56 @@ export async function POST(request: NextRequest) {
       });
 
       return NextResponse.json({ success: true, result: data });
+    }
+
+    if (body.action === "suspend_report_target") {
+      const { data: report, error: reportError } = await supabaseAdmin
+        .from("content_reports")
+        .select("*")
+        .eq("id", body.targetId)
+        .single();
+
+      if (reportError) throw new Error(reportError.message);
+
+      const table =
+        report.target_type === "collection"
+          ? "marketplace_collections"
+          : "marketplace_listings";
+      const update =
+        report.target_type === "collection"
+          ? { status: "suspended" }
+          : { status: "suspended", sale_status: "hidden" };
+
+      const { error: targetError } = await supabaseAdmin
+        .from(table)
+        .update(update)
+        .eq("id", report.target_id);
+
+      if (targetError) throw new Error(targetError.message);
+
+      const { error: reportUpdateError } = await supabaseAdmin
+        .from("content_reports")
+        .update({ status: "reviewing", admin_notes: notes })
+        .eq("id", body.targetId);
+
+      if (reportUpdateError) throw new Error(reportUpdateError.message);
+
+      await writeReview({
+        adminWallet: auth.wallet,
+        targetType: "content_report",
+        targetId: body.targetId,
+        decision: body.action,
+        notes,
+      });
+      await writeAudit({
+        adminWallet: auth.wallet,
+        eventType: body.action,
+        targetType: report.target_type,
+        targetId: report.target_id,
+        metadata: { reportId: report.id, update },
+      });
+
+      return NextResponse.json({ success: true });
     }
 
     return NextResponse.json(
